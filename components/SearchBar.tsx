@@ -12,7 +12,7 @@ export function SearchBar({
   placeholder = "Search fonts...",
 }: SearchBarProps) {
   const [value, setValue] = useState("");
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
