@@ -1,0 +1,63 @@
+[
+  {
+    "id": "inter",
+    "family": "Inter",
+    "category": "sans-serif",
+    "variants": ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    "subsets": ["latin", "latin-ext", "cyrillic", "greek", "vietnamese"],
+    "variable": true,
+    "axes": [{ "tag": "wght", "start": 100, "end": 900 }],
+    "designers": "Rasmus Andersson",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-11-07",
+    "popularity": 1
+  },
+  {
+    "id": "roboto",
+    "family": "Roboto",
+    "category": "sans-serif",
+    "variants": ["100", "300", "400", "500", "700", "900"],
+    "subsets": ["latin", "latin-ext", "cyrillic", "greek", "vietnamese"],
+    "variable": false,
+    "axes": [],
+    "lastModified": "2024-08-12",
+    "popularity": 2
+  },
+  {
+    "id": "playfair-display",
+    "family": "Playfair Display",
+    "category": "serif",
+    "variants": ["400", "500", "600", "700", "800", "900"],
+    "subsets": ["latin", "latin-ext", "cyrillic", "vietnamese"],
+    "variable": true,
+    "axes": [{ "tag": "wght", "start": 400, "end": 900 }],
+    "designers": "Claus Eggers Sørensen",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-09-04",
+    "popularity": 3
+  },
+  {
+    "id": "fira-code",
+    "family": "Fira Code",
+    "category": "monospace",
+    "variants": ["300", "400", "500", "600", "700"],
+    "subsets": ["latin", "latin-ext", "cyrillic", "greek"],
+    "variable": true,
+    "axes": [{ "tag": "wght", "start": 300, "end": 700 }],
+    "designers": "Nikita Prokopov",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-07-31",
+    "popularity": 4
+  },
+  {
+    "id": "dancing-script",
+    "family": "Dancing Script",
+    "category": "handwriting",
+    "variants": ["400", "500", "600", "700"],
+    "subsets": ["latin", "latin-ext", "vietnamese"],
+    "variable": true,
+    "axes": [{ "tag": "wght", "start": 400, "end": 700 }],
+    "lastModified": "2024-09-04",
+    "popularity": 5
+  }
+]
