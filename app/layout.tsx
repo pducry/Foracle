@@ -20,6 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2
+            focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg
+            focus:bg-[var(--color-accent)] focus:text-[var(--color-bg-primary)]
+            focus:text-sm focus:font-medium"
+        >
+          Skip to content
+        </a>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
