@@ -8,10 +8,11 @@ import { FontPreview } from "@/components/FontPreview";
 import { FontMeta } from "@/components/FontMeta";
 import { TypeControls, TypeSettings } from "@/components/TypeControls";
 import { VariantRow } from "@/components/VariantRow";
+import { PairSection } from "@/components/PairSection";
 
-type Props = { font: Font };
+type Props = { font: Font; allFonts: Font[] };
 
-export function FontDetailClient({ font }: Props) {
+export function FontDetailClient({ font, allFonts }: Props) {
   const [tab, setTab] = useState<"styles" | "text">("styles");
   const [customText, setCustomText] = useState("");
   const [settings, setSettings] = useState<TypeSettings>({
@@ -40,7 +41,7 @@ export function FontDetailClient({ font }: Props) {
 
       <Header showSearch={false} />
 
-      <main id="main-content" className="max-w-4xl mx-auto px-4">
+      <main id="main-content" className="px-6 lg:px-10">
         <div className="py-4">
           <Link href="/" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
             ← Back to catalog
@@ -117,6 +118,8 @@ export function FontDetailClient({ font }: Props) {
             </div>
           )}
         </section>
+
+        <PairSection font={font} allFonts={allFonts} />
       </main>
     </>
   );

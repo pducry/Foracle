@@ -28,5 +28,6 @@ export default async function FontPage({ params }: Props) {
   const { id } = await params;
   const font = getFontById(id);
   if (!font) notFound();
-  return <FontDetailClient font={font} />;
+  const allFonts = getAllFonts();
+  return <FontDetailClient font={font} allFonts={allFonts} />;
 }
