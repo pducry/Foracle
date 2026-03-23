@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Font } from "@/lib/types";
 import { getPairSuggestions, PairSuggestion } from "@/lib/pairing";
+import { Mood, MOODS, getMoodById } from "@/lib/moods";
 import { FontSelector } from "./FontSelector";
 import { PairPreview } from "./PairPreview";
 import { AiRationale } from "./AiRationale";
@@ -27,6 +28,7 @@ export function PairPlayground({
   const [rationale, setRationale] = useState<string | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [allRationales, setAllRationales] = useState<Record<string, string>>({});
+  const [mood, setMood] = useState<Mood | null>(null);
 
   const primary = heading;
 
@@ -35,13 +37,19 @@ export function PairPlayground({
       setSuggestions([]);
       return;
     }
-    const results = getPairSuggestions(primary, fonts);
+
+    const moodConfig = mood ? getMoodById(mood) : undefined;
+    const moodFilter = moodConfig
+      ? { bodyCategories: moodConfig.bodyCategories, preferVariable: moodConfig.preferVariable, minWeights: moodConfig.minWeights }
+      : undefined;
+
+    const results = getPairSuggestions(primary, fonts, 6, moodFilter);
     setSuggestions(results);
 
     if (!body && results.length > 0) {
       setBody(results[0].font);
     }
-  }, [primary, fonts]);
+  }, [primary, fonts, mood]);
 
   const fetchRationale = useCallback(async () => {
     if (!heading || !body || suggestions.length === 0) return;
@@ -86,7 +94,7 @@ export function PairPlayground({
         }
       }
     } catch {
-      // Silently fail — AI is progressive enhancement
+      // Silently fail
     } finally {
       setAiLoading(false);
     }
@@ -108,6 +116,32 @@ export function PairPlayground({
 
   return (
     <div className="space-y-6">
+      {/* Mood selector */}
+      <div>
+        <div className="text-sm text-[var(--color-text-muted)] mb-3">Mood</div>
+        <div className="flex gap-2 flex-wrap">
+          {MOODS.map((m) => (
+            <button
+              key={m.id}
+              onClick={() => setMood(mood === m.id ? null : m.id)}
+              className={`px-4 py-2 rounded-lg text-sm transition-all ${
+                mood === m.id
+                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] font-medium"
+                  : "border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)]"
+              }`}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+        {mood && (
+          <p className="mt-2 text-sm text-[var(--color-text-muted)] animate-in">
+            {getMoodById(mood).description}
+          </p>
+        )}
+      </div>
+
+      {/* Font selectors */}
       <div className="flex items-end gap-4">
         <FontSelector
           label="Heading Font"
@@ -132,6 +166,7 @@ export function PairPlayground({
         />
       </div>
 
+      {/* Preview */}
       {heading && body && (
         <PairPreview
           headingFamily={heading.family}
@@ -139,10 +174,12 @@ export function PairPlayground({
         />
       )}
 
+      {/* AI Rationale */}
       {heading && body && (
         <AiRationale rationale={rationale} loading={aiLoading} />
       )}
 
+      {/* Suggestions */}
       {heading && (
         <PairSuggestions
           suggestions={suggestions}

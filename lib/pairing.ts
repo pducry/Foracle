@@ -90,9 +90,21 @@ function assignRole(primary: Font, candidate: Font): PairRole {
 export function getPairSuggestions(
   primary: Font,
   allFonts: Font[],
-  limit = 6
+  limit = 6,
+  moodFilter?: { bodyCategories: Category[]; preferVariable: boolean; minWeights: number }
 ): PairSuggestion[] {
-  return allFonts
+  let candidates = allFonts;
+
+  if (moodFilter) {
+    candidates = candidates.filter((f) => {
+      if (!moodFilter.bodyCategories.includes(f.category)) return false;
+      if (moodFilter.preferVariable && !f.variable) return false;
+      if (f.variants.length < moodFilter.minWeights) return false;
+      return true;
+    });
+  }
+
+  return candidates
     .map((candidate) => ({
       font: candidate,
       score: scoreCandidate(primary, candidate),
