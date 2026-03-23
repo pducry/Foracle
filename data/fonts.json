@@ -48455,5 +48455,249 @@
     "lastModified": "2025-05-30",
     "popularity": 2091,
     "trending": 2253
+  },
+  {
+    "id": "satoshi",
+    "family": "Satoshi",
+    "category": "sans-serif",
+    "variants": [
+      "300",
+      "400",
+      "500",
+      "700",
+      "900",
+      "300i",
+      "400i",
+      "500i",
+      "700i",
+      "900i"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 300,
+        "end": 900
+      }
+    ],
+    "designers": "Deni Anggara, Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 50,
+    "source": "fontshare"
+  },
+  {
+    "id": "general-sans",
+    "family": "General Sans",
+    "category": "sans-serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "200i",
+      "300i",
+      "400i",
+      "500i",
+      "600i",
+      "700i"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Frode Helland, Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 60,
+    "source": "fontshare"
+  },
+  {
+    "id": "cabinet-grotesk",
+    "family": "Cabinet Grotesk",
+    "category": "display",
+    "variants": [
+      "100",
+      "200",
+      "400",
+      "500",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 100,
+        "end": 800
+      }
+    ],
+    "designers": "ITF Design Team, Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 70,
+    "source": "fontshare"
+  },
+  {
+    "id": "clash-display",
+    "family": "Clash Display",
+    "category": "display",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "ITF Design Team, Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 65,
+    "source": "fontshare"
+  },
+  {
+    "id": "monaspace",
+    "family": "Monaspace Neon",
+    "category": "monospace",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic",
+      "greek",
+      "vietnamese"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 800
+      }
+    ],
+    "designers": "GitHub Next, Lettermatic",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-06-01",
+    "popularity": 55,
+    "source": "github"
+  },
+  {
+    "id": "iosevka",
+    "family": "Iosevka",
+    "category": "monospace",
+    "variants": [
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic",
+      "greek",
+      "vietnamese"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 100,
+        "end": 900
+      }
+    ],
+    "designers": "Renzhi Li (Belleve Invis)",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-09-01",
+    "popularity": 45,
+    "source": "github"
+  },
+  {
+    "id": "commit-mono",
+    "family": "Commit Mono",
+    "category": "monospace",
+    "variants": [
+      "400",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Eigen Lenk",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-03-01",
+    "popularity": 80,
+    "source": "github"
+  },
+  {
+    "id": "hack",
+    "family": "Hack",
+    "category": "monospace",
+    "variants": [
+      "400",
+      "700",
+      "400i",
+      "700i"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic",
+      "greek"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Chris Simpkins",
+    "license": "MIT License",
+    "lastModified": "2024-01-01",
+    "popularity": 75,
+    "source": "github"
   }
 ]
