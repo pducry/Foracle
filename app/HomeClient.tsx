@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { FontGrid } from "@/components/FontGrid";
+import { CuratedSection } from "@/components/CuratedSection";
 import { Font, Category, CATEGORY_LABELS } from "@/lib/types";
 
 type HomeClientProps = {
@@ -41,20 +42,26 @@ export function HomeClient({ fonts }: HomeClientProps) {
       />
 
       <main id="main-content" className="px-6 lg:px-10">
-        {/* Subtitle */}
-        <section className="pt-8 pb-2">
+        {/* Value prop */}
+        <section className="pt-10 pb-2">
           <h1 className="text-lg font-semibold tracking-tight">
             Truly free fonts for your designs
           </h1>
-          <p className="mt-1 text-[var(--color-text-muted)] text-sm">
-            Foracle is a curated selection of {fonts.length.toLocaleString()} free fonts, including
-            sans serif, script and monospace.
+          <p className="mt-1 text-[var(--color-text-muted)] text-sm max-w-2xl">
+            A curated selection of {fonts.length} free fonts to help you make better design decisions.
           </p>
         </section>
 
+        {/* Editor's Picks */}
+        <CuratedSection fonts={fonts} />
+
+        {/* Divider */}
+        <div className="border-t border-[var(--color-border)]" />
+
         {/* Preview text input */}
-        <section className="py-4">
-          <div className="flex items-center gap-3">
+        <section className="pt-10 pb-4">
+          <h2 className="text-base font-semibold mb-1">Explore all fonts</h2>
+          <div className="flex items-center gap-3 mt-3">
             <input
               type="text"
               value={previewText}
