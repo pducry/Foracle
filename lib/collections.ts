@@ -2,63 +2,73 @@ export type PairCollection = {
   id: string;
   title: string;
   description: string;
+  context: string;
   pairs: { headingId: string; bodyId: string; note: string }[];
 };
 
 export const COLLECTIONS: PairCollection[] = [
   {
-    id: "saas",
-    title: "Best for SaaS",
-    description: "Clean, professional pairings that build trust and improve readability for software products.",
+    id: "dashboard",
+    title: "Dashboard & SaaS",
+    description: "Sans-serif only. Dashboards demand clarity, scanability, and neutral tone. Serifs add noise to data-dense interfaces.",
+    context: "KPIs, tables, charts, navigation, status labels — every element competes for attention. Use geometric or grotesque sans-serifs with strong x-height and clear number sets.",
     pairs: [
-      { headingId: "inter", bodyId: "source-sans-3", note: "Geometric clarity meets humanist warmth — the modern SaaS default" },
-      { headingId: "manrope", bodyId: "inter", note: "Rounded geometric heading with ultra-readable body text" },
-      { headingId: "space-grotesk", bodyId: "dm-sans", note: "Technical personality with friendly readability" },
-      { headingId: "outfit", bodyId: "nunito-sans", note: "Contemporary heading paired with a soft, approachable body" },
+      { headingId: "inter", bodyId: "source-sans-3", note: "The industry default. Inter's tabular figures and optical sizing are built for dashboards." },
+      { headingId: "geist", bodyId: "inter", note: "Vercel's font for headings, Inter for data. Modern tech stack aesthetic." },
+      { headingId: "space-grotesk", bodyId: "dm-sans", note: "Technical personality in headings, friendly clarity in body. Great for developer-facing SaaS." },
+      { headingId: "outfit", bodyId: "figtree", note: "Geometric precision meets warm readability. Clean without being cold." },
+      { headingId: "plus-jakarta-sans", bodyId: "ibm-plex-sans", note: "Contemporary headings with IBM's engineered body text. Enterprise-grade." },
     ],
   },
   {
-    id: "editorial",
-    title: "Elegant Editorial",
-    description: "Timeless serif and mixed pairings for magazines, long-form content, and luxury brands.",
+    id: "crm",
+    title: "CRM & Enterprise",
+    description: "Strictly sans-serif. CRM interfaces are information-dense — tables, pipelines, contact cards. Legibility at small sizes is non-negotiable.",
+    context: "Users scan hundreds of records daily. The font must disappear — never distract from the data. Prioritize x-height, clear number rendering, and weight range for hierarchy.",
     pairs: [
-      { headingId: "playfair-display", bodyId: "lora", note: "High contrast display serif over transitional body — classic editorial" },
-      { headingId: "cormorant-garamond", bodyId: "proza-libre", note: "Elegant French Renaissance heading with modern humanist body" },
-      { headingId: "libre-baskerville", bodyId: "source-serif-4", note: "British typographic tradition meets contemporary serif" },
-      { headingId: "dm-serif-display", bodyId: "crimson-text", note: "Bold serif display heading over scholarly body text" },
+      { headingId: "ibm-plex-sans", bodyId: "inter", note: "IBM's corporate clarity meets the web standard. Built for enterprise scale." },
+      { headingId: "inter", bodyId: "dm-sans", note: "Inter for structure, DM Sans for labels and descriptions. Subtle warmth in a professional context." },
+      { headingId: "manrope", bodyId: "source-sans-3", note: "Rounded geometry softens dense data. Adobe's body text handles long contact lists." },
+      { headingId: "figtree", bodyId: "inter", note: "Friendly headings over Inter's systematic body. Approachable CRM for small teams." },
+      { headingId: "sora", bodyId: "plus-jakarta-sans", note: "Forward-looking headings with modern body. For next-gen CRM products." },
+    ],
+  },
+  {
+    id: "blog",
+    title: "Blog & Editorial",
+    description: "Serifs shine here. Long-form reading benefits from the rhythm and flow that serifs provide. Mix serif headings with sans-serif body, or go full serif.",
+    context: "Reading comfort over 1000+ words is the priority. Serif headings create editorial authority, while body text needs generous x-height and open counters.",
+    pairs: [
+      { headingId: "playfair-display", bodyId: "source-serif-4", note: "High-contrast display meets Adobe's best body serif. Classic editorial hierarchy." },
+      { headingId: "instrument-serif", bodyId: "inter", note: "Beautiful editorial heading over the web's most readable sans. Modern blog standard." },
+      { headingId: "fraunces", bodyId: "literata", note: "Expressive variable heading with Google's screen-optimized serif. Contemporary editorial." },
+      { headingId: "cormorant-garamond", bodyId: "lora", note: "French elegance over calligraphic warmth. For literary and cultural publications." },
+      { headingId: "dm-serif-display", bodyId: "crimson-pro", note: "Bold serif headline over old-style body. Traditional magazine feel." },
     ],
   },
   {
     id: "developer",
-    title: "Developer Portfolios",
-    description: "Technical moods with monospace accents for developer and engineering portfolios.",
+    title: "Developer & Technical",
+    description: "Sans-serif headings with monospace body or accents. Code-native aesthetic that respects the technical audience.",
+    context: "Developer portfolios, documentation sites, technical blogs. Monospace fonts signal code credibility; sans-serif headings provide hierarchy.",
     pairs: [
-      { headingId: "jetbrains-mono", bodyId: "inter", note: "Developer-native heading with the web's most readable sans-serif" },
-      { headingId: "space-grotesk", bodyId: "fira-code", note: "Geometric heading meets ligature-rich monospace for code-heavy sites" },
-      { headingId: "sora", bodyId: "ibm-plex-mono", note: "Futuristic geometric heading with IBM's engineering monospace" },
-      { headingId: "archivo", bodyId: "source-code-pro", note: "Grotesque precision heading with Adobe's coding typeface" },
-    ],
-  },
-  {
-    id: "ecommerce",
-    title: "E-commerce",
-    description: "Pairings that balance visual appeal with conversion — designed for product pages and storefronts.",
-    pairs: [
-      { headingId: "dm-serif-display", bodyId: "nunito-sans", note: "Premium feel heading with friendly, scannable body text" },
-      { headingId: "poppins", bodyId: "open-sans", note: "Modern geometric heading with the universal body typeface" },
-      { headingId: "josefin-sans", bodyId: "lato", note: "Elegant thin heading with warm humanist body" },
-      { headingId: "raleway", bodyId: "merriweather-sans", note: "Stylish display heading paired with screen-optimized body" },
+      { headingId: "space-grotesk", bodyId: "jetbrains-mono", note: "Retro-futuristic heading with the developer's favorite mono. Perfect for dev portfolios." },
+      { headingId: "inter", bodyId: "fira-code", note: "Clean heading over ligature-rich code font. Documentation and technical writing." },
+      { headingId: "sora", bodyId: "ibm-plex-mono", note: "Futuristic heading with IBM's engineering mono. For AI/ML product sites." },
+      { headingId: "geist", bodyId: "geist-mono", note: "Vercel's matched pair. The Next.js ecosystem standard." },
+      { headingId: "outfit", bodyId: "recursive", note: "Geometric heading with the most versatile mono. 5 variable axes for creative coding." },
     ],
   },
   {
     id: "creative",
     title: "Creative & Portfolio",
-    description: "Expressive, personality-driven pairings for designers, artists, and creative agencies.",
+    description: "Personality-driven pairings. Display fonts for impact, balanced by readable sans-serif body text. Break the rules, but readably.",
+    context: "Design portfolios, agency sites, creative studios. The heading font IS the design statement. Body text stays out of the way.",
     pairs: [
-      { headingId: "abril-fatface", bodyId: "poppins", note: "Dramatic high-contrast display over clean geometric body" },
-      { headingId: "righteous", bodyId: "open-sans", note: "Rounded retro heading with neutral modern body" },
-      { headingId: "bebas-neue", bodyId: "montserrat", note: "Condensed uppercase heading meets versatile geometric body" },
-      { headingId: "anton", bodyId: "work-sans", note: "Bold impact heading with friendly rounded body text" },
+      { headingId: "bricolage-grotesque", bodyId: "dm-sans", note: "The breakout display font of 2024-2025 over a clean geometric body." },
+      { headingId: "syne", bodyId: "inter", note: "Art/culture heading with the universal body. Expressive without sacrificing readability." },
+      { headingId: "bebas-neue", bodyId: "work-sans", note: "Maximum impact condensed heading over friendly rounded body." },
+      { headingId: "space-grotesk", bodyId: "outfit", note: "Tech-personality heading with modern geometric body. For design-engineer hybrids." },
     ],
   },
 ];
