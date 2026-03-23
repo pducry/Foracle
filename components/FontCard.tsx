@@ -6,6 +6,7 @@ import { FontPreview } from "./FontPreview";
 
 type FontCardProps = {
   font: Font;
+  previewText?: string;
 };
 
 function getDefaultWeight(font: Font): number {
@@ -16,37 +17,37 @@ function getDefaultWeight(font: Font): number {
   return numericWeights[0] ?? 400;
 }
 
-export function FontCard({ font }: FontCardProps) {
+export function FontCard({ font, previewText }: FontCardProps) {
   const weight = getDefaultWeight(font);
+  const displayText = previewText || font.family;
 
   return (
     <Link
       href={`/font/${font.id}`}
-      className="group block rounded-lg bg-[var(--color-bg-secondary)]
-        border border-[var(--color-border)] hover:border-[var(--color-text-muted)]
-        transition-colors overflow-hidden"
+      className="group block border border-[var(--color-border)]
+        hover:bg-[var(--color-bg-secondary)] transition-colors"
     >
-      <div className="px-5 pt-4">
-        <span className="text-xs text-[var(--color-text-secondary)]">
+      <div className="px-4 pt-3">
+        <span className="text-[11px] text-[var(--color-text-muted)]">
           {font.family}
         </span>
       </div>
 
-      <div className="px-5 py-8 flex items-center justify-center min-h-[120px]">
+      <div className="px-6 py-8 flex items-center justify-center min-h-[140px]">
         <FontPreview
           family={font.family}
-          text={font.family}
+          text={displayText}
           weight={weight}
-          className="text-3xl text-[var(--color-text-primary)]"
+          className="text-4xl lg:text-5xl text-[var(--color-text-primary)] text-center"
         />
       </div>
 
-      <div className="px-5 pb-4 flex items-center gap-2 text-xs text-[var(--color-text-muted)]">
+      <div className="px-4 pb-3 flex items-center gap-2 text-[11px] text-[var(--color-text-muted)]">
         <span>{CATEGORY_LABELS[font.category]}</span>
         <span>·</span>
         <span>{font.variants.length} styles</span>
         {font.variable && (
-          <span className="px-1.5 py-0.5 rounded border border-[var(--color-border)] text-[10px]">
+          <span className="ml-auto px-1.5 py-0.5 rounded border border-[var(--color-border)] text-[10px] uppercase tracking-wider">
             variable
           </span>
         )}

@@ -10,9 +10,10 @@ type FontGridProps = {
   fonts: Font[];
   query?: string;
   categoryLabel?: string;
+  previewText?: string;
 };
 
-export function FontGrid({ fonts, query, categoryLabel }: FontGridProps) {
+export function FontGrid({ fonts, query, categoryLabel, previewText }: FontGridProps) {
   const [visible, setVisible] = useState(PAGE_SIZE);
 
   useEffect(() => {
@@ -41,9 +42,9 @@ export function FontGrid({ fonts, query, categoryLabel }: FontGridProps) {
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {fonts.slice(0, visible).map((font) => (
-          <FontCard key={font.id} font={font} />
+          <FontCard key={font.id} font={font} previewText={previewText} />
         ))}
       </div>
 

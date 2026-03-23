@@ -6,11 +6,12 @@ import { Category, CATEGORY_LABELS, ALL_CATEGORIES } from "@/lib/types";
 type FilterPillsProps = {
   selected: Category | null;
   onSelect: (category: Category | null) => void;
+  inline?: boolean;
 };
 
 const options: (Category | null)[] = [null, ...ALL_CATEGORIES];
 
-export function FilterPills({ selected, onSelect }: FilterPillsProps) {
+export function FilterPills({ selected, onSelect, inline = false }: FilterPillsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
@@ -24,6 +25,30 @@ export function FilterPills({ selected, onSelect }: FilterPillsProps) {
     buttons?.[nextIndex]?.focus();
     onSelect(options[nextIndex]);
   };
+
+  if (inline) {
+    return (
+      <div ref={containerRef} role="tablist" className="flex items-center gap-1">
+        {ALL_CATEGORIES.map((opt, i) => (
+          <button
+            key={opt}
+            role="tab"
+            tabIndex={selected === opt ? 0 : -1}
+            aria-selected={selected === opt}
+            onClick={() => onSelect(selected === opt ? null : opt)}
+            onKeyDown={(e) => handleKeyDown(e, i + 1)}
+            className={`px-3 py-1 rounded text-xs font-medium whitespace-nowrap transition-colors ${
+              selected === opt
+                ? "text-[var(--color-text-primary)]"
+                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]"
+            }`}
+          >
+            {CATEGORY_LABELS[opt]}
+          </button>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div
