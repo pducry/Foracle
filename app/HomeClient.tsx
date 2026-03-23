@@ -35,7 +35,7 @@ export function HomeClient({ fonts }: HomeClientProps) {
     <>
       <Header onSearch={setSearch} />
 
-      <main id="main-content" className="max-w-7xl mx-auto px-4">
+      <main id="main-content" className="px-6 lg:px-10">
         {/* Hero */}
         <section className="text-center py-12">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
