@@ -39,61 +39,54 @@ function CollectionCard({
     }`}>
       <button
         onClick={onToggle}
-        className="w-full text-left p-8 transition-colors"
+        className="w-full text-left py-12 lg:py-16 px-10 lg:px-14 transition-colors"
       >
-        <div className="flex items-start gap-5">
-          {/* Icon */}
-          <div className={`shrink-0 w-14 h-14 rounded-xl flex items-center justify-center text-2xl transition-colors ${
-            isOpen
-              ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]"
-              : "bg-[var(--color-bg-tertiary)] text-[var(--color-text-muted)]"
-          }`}>
-            {icon}
-          </div>
-
+        <div className="flex items-center justify-between gap-6">
           <div className="flex-1 min-w-0">
-            {/* Title — big and bold */}
-            <h3 className="text-2xl font-bold tracking-tight">{collection.title}</h3>
-            <p className="text-sm text-[var(--color-text-secondary)] mt-2 max-w-2xl">{collection.description}</p>
+            {/* Pair count label */}
+            <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-3">
+              {collection.pairs.length} curated pairs
+            </div>
 
-            {/* Context rationale */}
-            <p className="text-xs text-[var(--color-text-muted)] mt-2 max-w-2xl leading-relaxed italic">{collection.context}</p>
+            {/* Title — very prominent */}
+            <h3 className="text-4xl lg:text-5xl font-bold tracking-tight">{collection.title}</h3>
+
+            {/* Description */}
+            <p className="text-base text-[var(--color-text-secondary)] mt-4 max-w-3xl leading-relaxed">{collection.description}</p>
 
             {/* Mini preview chips when closed */}
             {!isOpen && (
-              <div className="flex flex-wrap gap-2 mt-4">
+              <div className="flex flex-wrap gap-2 mt-6">
                 {collection.pairs.map((pair) => {
                   const hf = fonts.find((f) => f.id === pair.headingId);
                   const bf = fonts.find((f) => f.id === pair.bodyId);
                   if (!hf || !bf) return null;
                   return (
                     <div key={pair.headingId + pair.bodyId}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]">
-                      <span className="text-xs font-medium">{hf.family}</span>
-                      <span className="text-[10px] text-[var(--color-text-muted)]">×</span>
-                      <span className="text-xs font-medium">{bf.family}</span>
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]">
+                      <span className="text-sm font-medium">{hf.family}</span>
+                      <span className="text-xs text-[var(--color-text-muted)]">×</span>
+                      <span className="text-sm font-medium">{bf.family}</span>
                     </div>
                   );
                 })}
               </div>
             )}
+
+            {/* Context when open */}
+            {isOpen && (
+              <p className="text-sm text-[var(--color-text-muted)] mt-4 max-w-2xl leading-relaxed italic">{collection.context}</p>
+            )}
           </div>
 
           {/* Toggle */}
-          <div className={`shrink-0 w-8 h-8 rounded-lg border flex items-center justify-center text-sm transition-colors ${
+          <div className={`shrink-0 w-10 h-10 rounded-xl border flex items-center justify-center text-lg transition-colors ${
             isOpen
               ? "border-[var(--color-text-primary)]/30 text-[var(--color-text-primary)]"
               : "border-[var(--color-border)] text-[var(--color-text-muted)]"
           }`}>
             {isOpen ? "−" : "+"}
           </div>
-        </div>
-
-        {/* Pair count */}
-        <div className="ml-[76px] mt-3">
-          <span className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)]">
-            {collection.pairs.length} curated pairs
-          </span>
         </div>
       </button>
 
