@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Font } from "@/lib/types";
 import { FontCard } from "./FontCard";
 
@@ -15,6 +15,7 @@ type FontGridProps = {
 
 export function FontGrid({ fonts, query, categoryLabel, previewText }: FontGridProps) {
   const [visible, setVisible] = useState(PAGE_SIZE);
+  const [draggingFont, setDraggingFont] = useState<Font | null>(null);
 
   useEffect(() => {
     setVisible(PAGE_SIZE);
@@ -22,6 +23,27 @@ export function FontGrid({ fonts, query, categoryLabel, previewText }: FontGridP
 
   const showMore = () => setVisible((v) => v + PAGE_SIZE);
   const hasMore = visible < fonts.length;
+
+  const handleDragStart = useCallback((e: DragEvent) => {
+    const fontId = (e.target as HTMLElement)?.closest("[data-font-id]")?.getAttribute("data-font-id");
+    if (fontId) {
+      const font = fonts.find((f) => f.id === fontId);
+      if (font) setDraggingFont(font);
+    }
+  }, [fonts]);
+
+  const handleDragEnd = useCallback(() => {
+    setDraggingFont(null);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("dragstart", handleDragStart);
+    document.addEventListener("dragend", handleDragEnd);
+    return () => {
+      document.removeEventListener("dragstart", handleDragStart);
+      document.removeEventListener("dragend", handleDragEnd);
+    };
+  }, [handleDragStart, handleDragEnd]);
 
   if (fonts.length === 0) {
     return (
@@ -42,9 +64,21 @@ export function FontGrid({ fonts, query, categoryLabel, previewText }: FontGridP
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {draggingFont && (
+        <div className="mb-4 flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-sm text-[var(--color-text-secondary)] animate-in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 3H2v15h7c1.7 0 3 1.3 3 3V7c0-2.2-1.8-4-4-4z" />
+            <path d="M16 3h6v15h-7c-1.7 0-3 1.3-3 3V7c0-2.2 1.8-4 4-4z" />
+          </svg>
+          Drop <strong className="text-[var(--color-text-primary)]">{draggingFont.family}</strong> onto another font to pair them
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {fonts.slice(0, visible).map((font) => (
-          <FontCard key={font.id} font={font} previewText={previewText} />
+          <div key={font.id} data-font-id={font.id}>
+            <FontCard font={font} previewText={previewText} draggingFont={draggingFont} />
+          </div>
         ))}
       </div>
 

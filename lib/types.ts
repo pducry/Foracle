@@ -42,4 +42,5 @@ export type Font = {
   trending?: number;
   description?: string;
   numGlyphs?: number;
+  source?: string;
 };

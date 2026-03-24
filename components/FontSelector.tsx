@@ -45,7 +45,7 @@ export function FontSelector({
 
   return (
     <div ref={ref} className="relative flex-1">
-      <div className="text-[11px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+      <div className="text-sm uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
         {label}
       </div>
       <button

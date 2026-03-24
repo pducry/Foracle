@@ -1,21 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #111111;
-  --color-bg-tertiary: #1a1a1a;
+  --color-bg-primary: #0D2F95;
+  --color-bg-secondary: #0a267a;
+  --color-bg-tertiary: #1238a5;
   --color-text-primary: #ffffff;
-  --color-text-secondary: #aaaaaa;
-  --color-text-muted: #666666;
-  --color-border: #222222;
+  --color-text-secondary: #b0c4ef;
+  --color-text-muted: #6b8bc9;
+  --color-border: #1740b8;
   --color-accent: #ffffff;
 }
 
 :root {
   color-scheme: dark;
+  --color-bg-primary: #0D2F95;
+  --color-bg-secondary: #0a267a;
+  --color-bg-tertiary: #1238a5;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b0c4ef;
+  --color-text-muted: #6b8bc9;
+  --color-border: #1740b8;
+  --color-accent: #ffffff;
 }
 
-:root.light {
+[data-theme="light"] {
   color-scheme: light;
   --color-bg-primary: #ffffff;
   --color-bg-secondary: #f5f5f5;
@@ -31,8 +39,14 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 450;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 18px;
 }
 
 @keyframes shimmer {
@@ -58,4 +72,17 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

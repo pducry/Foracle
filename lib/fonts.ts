@@ -3,8 +3,32 @@ import { Font, Category } from "./types";
 
 const fonts: Font[] = fontsData as Font[];
 
+// Interleave categories so the grid shows variety
+function interleaveByCategory(list: Font[]): Font[] {
+  const buckets: Record<string, Font[]> = {};
+  for (const f of list) {
+    (buckets[f.category] ??= []).push(f);
+  }
+  const categories = Object.keys(buckets);
+  const result: Font[] = [];
+  let added = true;
+  while (added) {
+    added = false;
+    for (const cat of categories) {
+      const font = buckets[cat].shift();
+      if (font) {
+        result.push(font);
+        added = true;
+      }
+    }
+  }
+  return result;
+}
+
+const interleaved: Font[] = interleaveByCategory(fonts);
+
 export function getAllFonts(): Font[] {
-  return fonts;
+  return interleaved;
 }
 
 export function getFontById(id: string): Font | undefined {

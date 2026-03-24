@@ -30,10 +30,9 @@ export default function RootLayout({
           Skip to content
         </a>
         <ThemeProvider
-          attribute="class"
+          attribute="data-theme"
           defaultTheme="dark"
           themes={["dark", "light"]}
-          value={{ dark: "", light: "light" }}
         >
           {children}
         </ThemeProvider>

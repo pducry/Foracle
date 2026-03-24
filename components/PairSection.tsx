@@ -57,7 +57,7 @@ export function PairSection({ font, allFonts }: PairSectionProps) {
 
   return (
     <section className="py-8 border-t border-[var(--color-border)]">
-      <h2 className="text-[11px] uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
+      <h2 className="text-sm uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
         Pairs well with
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">

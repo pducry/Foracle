@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Font, CATEGORY_LABELS } from "@/lib/types";
 import { FontPreview } from "./FontPreview";
 import { getCuratedInfo } from "@/lib/curated";
+import { FoundryBadge } from "./FoundryBadge";
 
 type FontCardProps = {
   font: Font;
@@ -90,50 +91,81 @@ export function FontCard({ font, previewText, draggingFont }: FontCardProps) {
         className={`block cursor-grab active:cursor-grabbing ${dragOver && isValidDrop ? "opacity-30" : ""}`}
         draggable={false}
       >
-        <div className="px-4 pt-3 flex items-center justify-between">
+        {/* Top bar — font name + foundry + curated badge */}
+        <div className="px-5 pt-4 flex items-center justify-between">
           <span className="text-sm text-[var(--color-text-muted)]">
             {font.family}
           </span>
-          {curated && (
-            <span className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] border border-[var(--color-border)] px-1.5 py-0.5 rounded">
-              ★ Pick
-            </span>
-          )}
+          <div className="flex items-center gap-2">
+            {curated && (
+              <span className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] border border-[var(--color-border)] px-1.5 py-0.5 rounded">
+                ★ Pick
+              </span>
+            )}
+          </div>
         </div>
 
-        <div className="px-6 py-12 flex items-center justify-center min-h-[240px]">
+        {/* Font preview — generous height */}
+        <div className="px-6 py-8 flex items-center justify-center min-h-[180px]">
           <FontPreview
             family={font.family}
             text={displayText}
             weight={weight}
-            className="text-4xl lg:text-5xl text-[var(--color-text-primary)] text-center"
+            className="text-3xl lg:text-4xl text-[var(--color-text-primary)] text-center"
           />
         </div>
       </Link>
 
-      <div className={`px-4 pb-3 flex items-center gap-2 text-sm text-[var(--color-text-muted)] ${dragOver && isValidDrop ? "opacity-30" : ""}`}>
-        <span>{CATEGORY_LABELS[font.category]}</span>
-        <span>·</span>
-        <span>{font.variants.length} styles</span>
-        {font.variable && (
-          <span className="px-1.5 py-0.5 rounded border border-[var(--color-border)] text-xs uppercase tracking-wider">
-            variable
-          </span>
-        )}
-        <Link
-          href={`/pair?heading=${font.id}`}
-          className="ml-auto flex items-center gap-1 px-2 py-1 rounded text-xs uppercase tracking-wider
-            border border-[var(--color-border)] text-[var(--color-text-muted)]
-            hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)]
-            transition-colors"
-          draggable={false}
-        >
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8 3H2v15h7c1.7 0 3 1.3 3 3V7c0-2.2-1.8-4-4-4z" />
-            <path d="M16 3h6v15h-7c-1.7 0-3 1.3-3 3V7c0-2.2 1.8-4 4-4z" />
-          </svg>
-          Pair
-        </Link>
+      {/* Bottom bar — metadata + foundry + actions */}
+      <div className={`px-5 pb-4 space-y-3 ${dragOver && isValidDrop ? "opacity-30" : ""}`}>
+        {/* Foundry badge */}
+        <FoundryBadge source={font.source} />
+
+        {/* Metadata + actions */}
+        <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+          <span>{CATEGORY_LABELS[font.category]}</span>
+          <span>·</span>
+          <span>{font.variants.length} styles</span>
+          {font.variable && (
+            <span className="px-1.5 py-0.5 rounded border border-[var(--color-border)] text-xs uppercase tracking-wider">
+              variable
+            </span>
+          )}
+          <div className="ml-auto flex items-center gap-2">
+            <a
+              href={`https://fonts.google.com/specimen/${font.family.replace(/ /g, "+")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-2 py-1 rounded text-xs uppercase tracking-wider
+                border border-[var(--color-border)] text-[var(--color-text-muted)]
+                hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)]
+                transition-colors"
+              draggable={false}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Get
+            </a>
+            <Link
+              href={`/pair?heading=${font.id}`}
+              className="flex items-center gap-1 px-2 py-1 rounded text-xs uppercase tracking-wider
+                border border-[var(--color-border)] text-[var(--color-text-muted)]
+                hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)]
+                transition-colors"
+              draggable={false}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 3H2v15h7c1.7 0 3 1.3 3 3V7c0-2.2-1.8-4-4-4z" />
+                <path d="M16 3h6v15h-7c-1.7 0-3 1.3-3 3V7c0-2.2 1.8-4 4-4z" />
+              </svg>
+              Pair
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
