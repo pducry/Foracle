@@ -170,7 +170,7 @@ export function AsciiArt({ seed, className = "" }: AsciiArtProps) {
   return (
     <div className={`w-full rounded-xl bg-[var(--color-bg-tertiary)] overflow-hidden ${className}`}>
       <pre
-        className="text-[var(--color-text-muted)]/30 text-[6px] md:text-[7px] lg:text-[8px] leading-[1.15]
+        className="text-[var(--color-text-primary)]/70 text-[6px] md:text-[7px] lg:text-[8px] leading-[1.15]
           font-mono whitespace-pre overflow-hidden flex items-center justify-center p-4 min-h-[220px]
           select-none"
       >

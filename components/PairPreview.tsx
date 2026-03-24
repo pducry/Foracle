@@ -122,6 +122,8 @@ function BlogTemplate({ h, b }: { h: React.CSSProperties; b: React.CSSProperties
             </div>
           </div>
 
+          <AsciiArt seed={5} className="my-4" />
+
           <div contentEditable suppressContentEditableWarning
             className="text-[var(--color-text-secondary)] outline-none" style={b}>
             The key is understanding that similarity breeds monotony while excess contrast creates chaos.
@@ -133,6 +135,8 @@ function BlogTemplate({ h, b }: { h: React.CSSProperties; b: React.CSSProperties
           <div contentEditable suppressContentEditableWarning className="outline-none" style={hs(0.55)}>
             Building a type system
           </div>
+
+          <AsciiArt seed={2} className="my-4" />
 
           <div contentEditable suppressContentEditableWarning
             className="text-[var(--color-text-secondary)] outline-none" style={b}>
@@ -149,6 +153,8 @@ function BlogTemplate({ h, b }: { h: React.CSSProperties; b: React.CSSProperties
             </div>
           </div>
         </div>
+
+        <AsciiArt seed={7} className="mt-8" />
 
         {/* Tags */}
         <div className="flex gap-2 mt-10 pt-8 border-t border-[var(--color-border)]">
