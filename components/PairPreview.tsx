@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FontPreview } from "./FontPreview";
+import { AsciiArt } from "./AsciiArt";
 
 type PairPreviewProps = {
   headingFamily: string;
@@ -88,9 +89,7 @@ function BlogTemplate({ h, b }: { h: React.CSSProperties; b: React.CSSProperties
           </div>
         </div>
 
-        <div className="w-full h-64 rounded-xl bg-[var(--color-bg-tertiary)] my-8 flex items-center justify-center">
-          <span className="text-[var(--color-text-muted)] text-sm">Cover Image · 16:9</span>
-        </div>
+        <AsciiArt seed={3} className="my-8" />
 
         <div className="space-y-6">
           <div contentEditable suppressContentEditableWarning
