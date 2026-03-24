@@ -48699,5 +48699,617 @@
     "lastModified": "2024-01-01",
     "popularity": 75,
     "source": "github"
+  },
+  {
+    "id": "chillax",
+    "family": "Chillax",
+    "category": "sans-serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 90,
+    "source": "fontshare"
+  },
+  {
+    "id": "clash-grotesk",
+    "family": "Clash Grotesk",
+    "category": "sans-serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 85,
+    "source": "fontshare"
+  },
+  {
+    "id": "switzer",
+    "family": "Switzer",
+    "category": "sans-serif",
+    "variants": [
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 100,
+        "end": 900
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 75,
+    "source": "fontshare"
+  },
+  {
+    "id": "synonym",
+    "family": "Synonym",
+    "category": "sans-serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 95,
+    "source": "fontshare"
+  },
+  {
+    "id": "hauora",
+    "family": "Hauora",
+    "category": "sans-serif",
+    "variants": [
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 300,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 100,
+    "source": "fontshare"
+  },
+  {
+    "id": "ranade",
+    "family": "Ranade",
+    "category": "sans-serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 92,
+    "source": "fontshare"
+  },
+  {
+    "id": "saans",
+    "family": "Saans",
+    "category": "sans-serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 800
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 88,
+    "source": "fontshare"
+  },
+  {
+    "id": "panchang",
+    "family": "Panchang",
+    "category": "display",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 800
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 82,
+    "source": "fontshare"
+  },
+  {
+    "id": "boska",
+    "family": "Boska",
+    "category": "serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 87,
+    "source": "fontshare"
+  },
+  {
+    "id": "erode",
+    "family": "Erode",
+    "category": "serif",
+    "variants": [
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 300,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 83,
+    "source": "fontshare"
+  },
+  {
+    "id": "gambetta",
+    "family": "Gambetta",
+    "category": "serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 91,
+    "source": "fontshare"
+  },
+  {
+    "id": "sentient",
+    "family": "Sentient",
+    "category": "serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 86,
+    "source": "fontshare"
+  },
+  {
+    "id": "zodiak",
+    "family": "Zodiak",
+    "category": "serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 800
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 78,
+    "source": "fontshare"
+  },
+  {
+    "id": "humane",
+    "family": "Humane",
+    "category": "display",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 900
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 72,
+    "source": "fontshare"
+  },
+  {
+    "id": "gambarino",
+    "family": "Gambarino",
+    "category": "display",
+    "variants": [
+      "400"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 93,
+    "source": "fontshare"
+  },
+  {
+    "id": "tanker",
+    "family": "Tanker",
+    "category": "display",
+    "variants": [
+      "400"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 89,
+    "source": "fontshare"
+  },
+  {
+    "id": "technor",
+    "family": "Technor",
+    "category": "display",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 700
+      }
+    ],
+    "designers": "Indian Type Foundry",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 84,
+    "source": "fontshare"
+  },
+  {
+    "id": "neue-montreal",
+    "family": "Neue Montreal",
+    "category": "sans-serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Pangram Pangram",
+    "license": "Free Trial",
+    "lastModified": "2024-01-01",
+    "popularity": 40,
+    "source": "pangram"
+  },
+  {
+    "id": "neue-machina",
+    "family": "Neue Machina",
+    "category": "display",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Pangram Pangram",
+    "license": "Free Trial",
+    "lastModified": "2024-01-01",
+    "popularity": 55,
+    "source": "pangram"
+  },
+  {
+    "id": "overused-grotesk",
+    "family": "Overused Grotesk",
+    "category": "sans-serif",
+    "variants": [
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext",
+      "cyrillic"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 300,
+        "end": 900
+      }
+    ],
+    "designers": "Random Maerz",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 65,
+    "source": "github"
+  },
+  {
+    "id": "basement-grotesque",
+    "family": "Basement Grotesque",
+    "category": "display",
+    "variants": [
+      "800",
+      "900"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Basement Studio",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 58,
+    "source": "github"
+  },
+  {
+    "id": "bluu-next",
+    "family": "Bluu Next",
+    "category": "serif",
+    "variants": [
+      "700"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Jean-Baptiste Morizot",
+    "license": "Free for personal and commercial use",
+    "lastModified": "2024-01-01",
+    "popularity": 62,
+    "source": "github"
   }
 ]

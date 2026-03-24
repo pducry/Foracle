@@ -3,6 +3,8 @@
 const SOURCES = [
   { name: "Google Fonts", style: "font-sans" },
   { name: "Fontshare", style: "font-sans" },
+  { name: "Freefaces", style: "font-sans tracking-wide" },
+  { name: "Pangram Pangram", style: "font-sans" },
   { name: "Font Squirrel", style: "font-sans" },
   { name: "Velvetyne", style: "font-sans italic" },
   { name: "Atipo Foundry", style: "font-sans tracking-wider" },

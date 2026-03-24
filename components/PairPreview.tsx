@@ -316,160 +316,233 @@ function CrmTemplate({ h, b }: { h: React.CSSProperties; b: React.CSSProperties 
 /* ─── DASHBOARD ─── */
 function DashboardTemplate({ h, b }: { h: React.CSSProperties; b: React.CSSProperties }) {
   const hs = (scale: number) => ({ ...h, fontSize: `${parseInt(h.fontSize as string) * scale}px` });
+  const headingFont = h.fontFamily as string;
+  const bodyFont = b.fontFamily as string;
   return (
     <div className="flex">
       {/* Sidebar */}
-      <div className="w-52 shrink-0 border-r border-[var(--color-border)] p-4 space-y-1">
-        <div className="font-bold text-sm mb-6" style={{ fontFamily: h.fontFamily }}>◈ Acme</div>
-        {[
-          { label: "Overview", active: true },
-          { label: "Analytics", active: false },
-          { label: "Customers", active: false },
-          { label: "Products", active: false },
-          { label: "Orders", active: false },
-          { label: "Settings", active: false },
-        ].map((item) => (
-          <div key={item.label}
-            className={`px-3 py-2 rounded-lg text-xs ${item.active ? "bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)]" : "text-[var(--color-text-muted)]"}`}
-            style={{ fontFamily: b.fontFamily }}>
-            {item.label}
-          </div>
-        ))}
-        <div className="pt-6 mt-6 border-t border-[var(--color-border)]">
-          <div className="px-3 py-2 text-xs text-[var(--color-text-muted)]" style={{ fontFamily: b.fontFamily }}>Team Plan</div>
-          <div className="px-3 mt-1">
-            <div className="h-1.5 rounded-full bg-[var(--color-bg-tertiary)] overflow-hidden">
-              <div className="h-full w-3/4 rounded-full bg-[var(--color-text-primary)]/40" />
+      <div className="w-56 shrink-0 border-r border-[var(--color-border)] flex flex-col">
+        <div className="p-5 border-b border-[var(--color-border)]">
+          <div className="font-bold" style={{ fontFamily: headingFont, fontSize: `${parseInt(h.fontSize as string) * 0.4}px` }}>◈ Acme</div>
+          <div className="text-[9px] text-[var(--color-text-muted)] mt-1 font-mono opacity-50">heading font</div>
+        </div>
+        <div className="p-3 flex-1 space-y-0.5">
+          {[
+            { label: "Overview", icon: "◻", active: true },
+            { label: "Analytics", icon: "◈", active: false },
+            { label: "Customers", icon: "◇", active: false },
+            { label: "Products", icon: "□", active: false },
+            { label: "Invoices", icon: "▭", active: false },
+            { label: "Reports", icon: "▦", active: false },
+          ].map((item) => (
+            <div key={item.label}
+              className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-xs transition-colors ${
+                item.active
+                  ? "bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] font-medium"
+                  : "text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]"
+              }`}
+              style={{ fontFamily: bodyFont }}>
+              <span className="text-[10px] w-4 text-center">{item.icon}</span>
+              {item.label}
             </div>
-            <div className="text-[10px] text-[var(--color-text-muted)] mt-1" style={{ fontFamily: b.fontFamily }}>75% of plan used</div>
+          ))}
+        </div>
+        <div className="p-4 border-t border-[var(--color-border)]">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-[var(--color-bg-tertiary)] flex items-center justify-center text-[10px]" style={{ fontFamily: headingFont }}>AK</div>
+            <div>
+              <div className="text-xs font-medium" style={{ fontFamily: bodyFont }}>Alex Kim</div>
+              <div className="text-[10px] text-[var(--color-text-muted)]" style={{ fontFamily: bodyFont }}>Admin</div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main */}
-      <div className="flex-1 p-6 space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
+      <div className="flex-1 p-6 space-y-6 overflow-hidden">
+        {/* Header with font labels */}
+        <div className="flex items-start justify-between">
           <div>
-            <div className="text-xs text-[var(--color-text-muted)]" style={{ fontFamily: b.fontFamily }}>Good morning, Alex</div>
-            <div contentEditable suppressContentEditableWarning className="outline-none mt-1" style={hs(0.5)}>
-              Dashboard
+            <div className="text-xs text-[var(--color-text-muted)]" style={{ fontFamily: bodyFont }}>Good morning, Alex</div>
+            <div className="mt-1 flex items-baseline gap-3">
+              <div contentEditable suppressContentEditableWarning className="outline-none" style={hs(0.55)}>
+                Dashboard
+              </div>
+              <span className="text-[9px] text-[var(--color-text-muted)] font-mono opacity-50 shrink-0">← heading font</span>
             </div>
           </div>
-          <div className="flex gap-2">
-            <div className="px-3 py-2 rounded-lg border border-[var(--color-border)] text-xs" style={{ fontFamily: b.fontFamily }}>
-              Mar 17 – Mar 23
+          <div className="flex gap-2 items-center">
+            <div className="flex gap-1 p-0.5 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+              {["24h", "7d", "30d", "90d"].map((p, i) => (
+                <span key={p} className={`px-2.5 py-1.5 rounded-md text-[10px] ${i === 1 ? "bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)]" : "text-[var(--color-text-muted)]"}`}
+                  style={{ fontFamily: bodyFont }}>{p}</span>
+              ))}
             </div>
-            <div className="px-3 py-2 rounded-lg bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-xs" style={{ fontFamily: b.fontFamily }}>
-              Download Report
+            <div className="px-3 py-2 rounded-lg bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-xs font-medium" style={{ fontFamily: bodyFont }}>
+              Export
             </div>
           </div>
         </div>
 
-        {/* KPIs */}
+        {/* KPI Row — large numbers in heading font */}
         <div className="grid grid-cols-4 gap-3">
           {[
-            { label: "Total Revenue", value: "$48,592", change: "+12.5%", up: true, spark: [3,5,4,7,6,8,7] },
-            { label: "Active Users", value: "2,847", change: "+8.2%", up: true, spark: [4,3,5,4,6,5,7] },
-            { label: "Conversion", value: "3.24%", change: "+0.4%", up: true, spark: [3,3,4,3,4,4,5] },
-            { label: "Churn Rate", value: "1.2%", change: "-0.3%", up: false, spark: [5,4,5,4,3,3,2] },
+            { label: "Total Revenue", value: "$48,592", sub: "+12.5% vs last period", up: true, spark: [30,45,35,60,50,75,55,70,48,85,65,80] },
+            { label: "Active Users", value: "2,847", sub: "+8.2% growth rate", up: true, spark: [40,35,50,45,55,50,60,55,65,58,70,68] },
+            { label: "Conversion", value: "3.24%", sub: "+0.4pp improvement", up: true, spark: [28,30,29,32,31,33,30,34,32,35,33,36] },
+            { label: "Avg. Order", value: "$67.30", sub: "-2.1% from target", up: false, spark: [72,70,68,71,69,67,70,66,68,65,67,64] },
           ].map((m) => (
             <div key={m.label} className="p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
-              <div className="flex items-center justify-between">
-                <div className="text-xs text-[var(--color-text-muted)]" style={{ fontFamily: b.fontFamily }}>{m.label}</div>
-                <div className="flex items-end gap-px h-4">
-                  {m.spark.map((v, i) => (
-                    <div key={i} className="w-1 rounded-sm bg-[var(--color-text-primary)]/20" style={{ height: `${v * 14}%` }} />
-                  ))}
+              <div className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-3" style={{ fontFamily: bodyFont }}>{m.label}</div>
+              <div className="text-2xl font-bold tracking-tight" style={{ fontFamily: headingFont }}>{m.value}</div>
+              <div className="flex items-center justify-between mt-3">
+                <div className={`text-[10px] ${m.up ? "text-emerald-400" : "text-red-400"}`} style={{ fontFamily: bodyFont }}>
+                  {m.sub}
                 </div>
               </div>
-              <div className="mt-2 text-xl font-bold" style={{ fontFamily: h.fontFamily }}>{m.value}</div>
-              <div className={`text-xs mt-1 ${m.up ? "text-green-400" : "text-red-400"}`} style={{ fontFamily: b.fontFamily }}>
-                {m.change} vs last week
+              <div className="flex items-end gap-[2px] h-8 mt-3">
+                {m.spark.map((v, i) => (
+                  <div key={i} className={`flex-1 rounded-sm ${i === m.spark.length - 1 ? "bg-[var(--color-text-primary)]/40" : "bg-[var(--color-text-primary)]/12"}`}
+                    style={{ height: `${v}%` }} />
+                ))}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Chart + Table */}
-        <div className="grid grid-cols-[2fr_1fr] gap-4">
-          {/* Chart */}
-          <div className="rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-5">
-            <div className="flex items-center justify-between mb-6">
-              <div className="text-sm font-medium" style={{ fontFamily: h.fontFamily }}>Revenue Overview</div>
-              <div className="flex gap-1 p-0.5 rounded-lg bg-[var(--color-bg-tertiary)]">
-                {["Daily", "Weekly", "Monthly"].map((p, i) => (
-                  <span key={p} className={`px-2.5 py-1 rounded-md text-[10px] ${i === 1 ? "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : "text-[var(--color-text-muted)]"}`}
-                    style={{ fontFamily: b.fontFamily }}>{p}</span>
-                ))}
-              </div>
+        {/* Font usage annotation */}
+        <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[var(--color-bg-secondary)]/50 border border-[var(--color-border)]/50">
+          <span className="text-[9px] font-mono text-[var(--color-text-muted)]">
+            heading → KPI values, section titles, amounts &nbsp;|&nbsp; body → labels, descriptions, table data, navigation
+          </span>
+        </div>
+
+        {/* Main chart area */}
+        <div className="rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-5">
+          <div className="flex items-center justify-between mb-2">
+            <div>
+              <div className="text-sm font-semibold" style={{ fontFamily: headingFont }}>Revenue & Users</div>
+              <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5" style={{ fontFamily: bodyFont }}>Dual-axis comparison over time</div>
             </div>
-            <div className="h-40 flex items-end gap-2">
-              {[35, 55, 40, 70, 50, 85, 65, 80, 55, 90, 72, 88, 60, 95].map((v, i) => (
-                <div key={i} className="flex-1 rounded-t-md bg-[var(--color-text-primary)]/15 hover:bg-[var(--color-text-primary)]/30 transition-colors"
-                  style={{ height: `${v}%` }} />
-              ))}
-            </div>
-            <div className="flex justify-between mt-3 text-[10px] text-[var(--color-text-muted)]" style={{ fontFamily: b.fontFamily }}>
-              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => <span key={d}>{d}</span>)}
+            <div className="flex gap-4 text-[10px]" style={{ fontFamily: bodyFont }}>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[var(--color-text-primary)]/30" /> Revenue</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-400/50" /> Users</span>
             </div>
           </div>
-
-          {/* Recent activity */}
-          <div className="rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-5">
-            <div className="text-sm font-medium mb-4" style={{ fontFamily: h.fontFamily }}>Recent Activity</div>
-            <div className="space-y-3">
-              {[
-                { action: "New order", detail: "#4821 · $234.00", time: "2m ago" },
-                { action: "User signed up", detail: "alex@company.io", time: "5m ago" },
-                { action: "Refund processed", detail: "#4789 · $67.00", time: "12m ago" },
-                { action: "New order", detail: "#4820 · $89.00", time: "18m ago" },
-                { action: "Review received", detail: "★★★★★ · Desk Lamp", time: "25m ago" },
-                { action: "Subscription", detail: "Pro plan · Monthly", time: "34m ago" },
-              ].map((a, i) => (
-                <div key={i} className="flex items-start justify-between py-2 border-b border-[var(--color-border)] last:border-0">
-                  <div>
-                    <div className="text-xs" style={{ fontFamily: b.fontFamily }}>{a.action}</div>
-                    <div className="text-[10px] text-[var(--color-text-muted)] mt-0.5" style={{ fontFamily: b.fontFamily }}>{a.detail}</div>
-                  </div>
-                  <div className="text-[10px] text-[var(--color-text-muted)] shrink-0" style={{ fontFamily: b.fontFamily }}>{a.time}</div>
+          {/* Y axis labels + chart */}
+          <div className="flex gap-2 mt-4">
+            <div className="flex flex-col justify-between text-[9px] text-[var(--color-text-muted)] py-1" style={{ fontFamily: bodyFont }}>
+              <span>$12k</span><span>$9k</span><span>$6k</span><span>$3k</span><span>$0</span>
+            </div>
+            <div className="flex-1">
+              <div className="h-44 flex items-end gap-[3px] relative">
+                {/* Grid lines */}
+                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
+                  {[0,1,2,3,4].map((i) => <div key={i} className="border-t border-[var(--color-border)]/30" />)}
                 </div>
-              ))}
+                {[35,48,42,65,55,78,62,85,58,92,75,88,68,95,72,90,78,88,82,96].map((v, i) => (
+                  <div key={i} className="flex-1 flex flex-col justify-end gap-[1px] relative z-10">
+                    <div className="rounded-sm bg-emerald-400/20" style={{ height: `${v * 0.4}%` }} />
+                    <div className="rounded-sm bg-[var(--color-text-primary)]/20 hover:bg-[var(--color-text-primary)]/35 transition-colors" style={{ height: `${v}%` }} />
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-between mt-2 text-[9px] text-[var(--color-text-muted)]" style={{ fontFamily: bodyFont }}>
+                {["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct"].map((d) => <span key={d}>{d}</span>)}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Table */}
-        <div className="rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] overflow-hidden">
-          <div className="px-5 py-3 border-b border-[var(--color-border)] flex items-center justify-between">
-            <div className="text-sm font-medium" style={{ fontFamily: h.fontFamily }}>Top Products</div>
-            <div className="text-xs text-[var(--color-text-muted)]" style={{ fontFamily: b.fontFamily }}>This week</div>
-          </div>
-          <table className="w-full">
-            <thead>
-              <tr className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider" style={{ fontFamily: b.fontFamily }}>
-                <th className="text-left px-5 py-2.5 font-medium">Product</th>
-                <th className="text-right px-5 py-2.5 font-medium">Sales</th>
-                <th className="text-right px-5 py-2.5 font-medium">Revenue</th>
-                <th className="text-right px-5 py-2.5 font-medium">Growth</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                { name: "Aura Pendant Light", sales: "142", revenue: "$48,280", growth: "+24%" },
-                { name: "Mono Desk Organizer", sales: "98", revenue: "$16,170", growth: "+18%" },
-                { name: "Arc Floor Mirror", sales: "67", revenue: "$34,840", growth: "+12%" },
-                { name: "Zen Ceramic Vase", sales: "203", revenue: "$18,067", growth: "+31%" },
-              ].map((p) => (
-                <tr key={p.name} className="border-t border-[var(--color-border)]">
-                  <td className="px-5 py-3 text-xs" style={{ fontFamily: b.fontFamily }}>{p.name}</td>
-                  <td className="px-5 py-3 text-xs text-right" style={{ fontFamily: b.fontFamily }}>{p.sales}</td>
-                  <td className="px-5 py-3 text-xs text-right font-medium" style={{ fontFamily: h.fontFamily }}>{p.revenue}</td>
-                  <td className="px-5 py-3 text-xs text-right text-green-400" style={{ fontFamily: b.fontFamily }}>{p.growth}</td>
+        {/* Two-column: Table + Activity */}
+        <div className="grid grid-cols-[3fr_2fr] gap-4">
+          {/* Rich table */}
+          <div className="rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-[var(--color-border)] flex items-center justify-between">
+              <div className="text-sm font-semibold" style={{ fontFamily: headingFont }}>Top Customers</div>
+              <div className="flex gap-1">
+                {["All", "Enterprise", "SMB"].map((f, i) => (
+                  <span key={f} className={`px-2 py-0.5 rounded text-[10px] ${i === 0 ? "bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)]" : "text-[var(--color-text-muted)]"}`}
+                    style={{ fontFamily: bodyFont }}>{f}</span>
+                ))}
+              </div>
+            </div>
+            <table className="w-full">
+              <thead>
+                <tr className="text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider border-b border-[var(--color-border)]" style={{ fontFamily: bodyFont }}>
+                  <th className="text-left px-5 py-2.5 font-medium">Customer</th>
+                  <th className="text-left px-3 py-2.5 font-medium">Plan</th>
+                  <th className="text-right px-3 py-2.5 font-medium">MRR</th>
+                  <th className="text-right px-5 py-2.5 font-medium">Growth</th>
                 </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: "Stripe", plan: "Enterprise", mrr: "$12,400", growth: "+18%", avatar: "ST" },
+                  { name: "Vercel", plan: "Enterprise", mrr: "$8,900", growth: "+24%", avatar: "VE" },
+                  { name: "Linear", plan: "Business", mrr: "$6,200", growth: "+31%", avatar: "LI" },
+                  { name: "Notion", plan: "Enterprise", mrr: "$5,800", growth: "+12%", avatar: "NO" },
+                  { name: "Raycast", plan: "Business", mrr: "$4,100", growth: "+45%", avatar: "RA" },
+                ].map((c) => (
+                  <tr key={c.name} className="border-t border-[var(--color-border)] hover:bg-[var(--color-bg-tertiary)]/50 transition-colors">
+                    <td className="px-5 py-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-6 h-6 rounded-md bg-[var(--color-bg-tertiary)] flex items-center justify-center text-[8px] font-bold" style={{ fontFamily: headingFont }}>{c.avatar}</div>
+                        <span className="text-xs font-medium" style={{ fontFamily: headingFont }}>{c.name}</span>
+                      </div>
+                    </td>
+                    <td className="px-3 py-3">
+                      <span className="px-2 py-0.5 rounded-full text-[9px] bg-[var(--color-bg-tertiary)]" style={{ fontFamily: bodyFont }}>{c.plan}</span>
+                    </td>
+                    <td className="px-3 py-3 text-xs text-right font-semibold tabular-nums" style={{ fontFamily: headingFont }}>{c.mrr}</td>
+                    <td className="px-5 py-3 text-xs text-right text-emerald-400 tabular-nums" style={{ fontFamily: bodyFont }}>{c.growth}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Activity feed + quick stats */}
+          <div className="space-y-4">
+            <div className="rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-5">
+              <div className="text-sm font-semibold mb-4" style={{ fontFamily: headingFont }}>Live Feed</div>
+              <div className="space-y-0">
+                {[
+                  { icon: "↑", color: "text-emerald-400", action: "New signup", detail: "sarah@linear.app", time: "now" },
+                  { icon: "$", color: "text-emerald-400", action: "Payment received", detail: "$2,400.00 · Stripe", time: "2m" },
+                  { icon: "→", color: "text-blue-400", action: "Plan upgraded", detail: "Business → Enterprise", time: "5m" },
+                  { icon: "↓", color: "text-red-400", action: "Churn risk", detail: "Acme Corp · 90 days inactive", time: "12m" },
+                  { icon: "★", color: "text-amber-400", action: "Review", detail: "5/5 · 'Best tool we've used'", time: "18m" },
+                  { icon: "$", color: "text-emerald-400", action: "Payment received", detail: "$890.00 · Notion", time: "25m" },
+                ].map((a, i) => (
+                  <div key={i} className="flex items-start gap-3 py-3 border-b border-[var(--color-border)]/50 last:border-0">
+                    <span className={`text-[10px] ${a.color} w-4 text-center mt-0.5`}>{a.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-medium" style={{ fontFamily: bodyFont }}>{a.action}</div>
+                      <div className="text-[10px] text-[var(--color-text-muted)] truncate mt-0.5" style={{ fontFamily: bodyFont }}>{a.detail}</div>
+                    </div>
+                    <div className="text-[9px] text-[var(--color-text-muted)] shrink-0 mt-0.5" style={{ fontFamily: bodyFont }}>{a.time}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick stats grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { label: "NPS Score", value: "72", sub: "Excellent" },
+                { label: "Support", value: "1.2h", sub: "Avg response" },
+                { label: "Uptime", value: "99.98%", sub: "Last 30 days" },
+                { label: "API Calls", value: "2.4M", sub: "This month" },
+              ].map((s) => (
+                <div key={s.label} className="p-3 rounded-lg bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+                  <div className="text-[9px] uppercase tracking-wider text-[var(--color-text-muted)]" style={{ fontFamily: bodyFont }}>{s.label}</div>
+                  <div className="text-lg font-bold mt-1" style={{ fontFamily: headingFont }}>{s.value}</div>
+                  <div className="text-[9px] text-[var(--color-text-muted)]" style={{ fontFamily: bodyFont }}>{s.sub}</div>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
