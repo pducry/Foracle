@@ -29,7 +29,7 @@ export function SourcesMarquee() {
               className="flex items-center shrink-0 mx-10"
             >
               <span
-                className={`text-xl text-[var(--color-text-muted)]/30 whitespace-nowrap ${source.style}`}
+                className={`text-xl text-[var(--color-text-secondary)] whitespace-nowrap ${source.style}`}
               >
                 {source.name}
               </span>
