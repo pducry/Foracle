@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTheme } from "next-themes";
 import { Header } from "@/components/Header";
 import { FontGrid } from "@/components/FontGrid";
 import { CuratedSection } from "@/components/CuratedSection";
@@ -13,25 +14,14 @@ type HomeClientProps = {
 
 export function HomeClient({ fonts }: HomeClientProps) {
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<Category | null>(null);
   const [previewText, setPreviewText] = useState("");
+  const { resolvedTheme } = useTheme();
 
   const filtered = useMemo(() => {
-    let result = fonts;
-
-    if (category) {
-      result = result.filter((f) => f.category === category);
-    }
-
-    if (search) {
-      const lower = search.toLowerCase();
-      result = result.filter((f) =>
-        f.family.toLowerCase().includes(lower)
-      );
-    }
-
-    return result;
-  }, [fonts, search, category]);
+    if (!search) return fonts;
+    const lower = search.toLowerCase();
+    return fonts.filter((f) => f.family.toLowerCase().includes(lower));
+  }, [fonts, search]);
 
   return (
     <>
@@ -41,7 +31,7 @@ export function HomeClient({ fonts }: HomeClientProps) {
         {/* Hero — centered, generous spacing, typographic contrast */}
         <section className="text-center py-20 lg:py-28 px-6">
           <img
-            src="/foracle-logo.png"
+            src={resolvedTheme === "light" ? "/logo-black.png" : "/foracle-logo.png"}
             alt="Foracle"
             className="h-16 md:h-20 lg:h-24 mx-auto"
           />
@@ -94,7 +84,6 @@ export function HomeClient({ fonts }: HomeClientProps) {
             <FontGrid
               fonts={filtered}
               query={search}
-              categoryLabel={category ? CATEGORY_LABELS[category] : undefined}
               previewText={previewText}
             />
           </section>

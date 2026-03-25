@@ -20,8 +20,8 @@ function getDefaultWeight(font: Font): number {
 
 const TIER_COLORS: Record<string, string> = {
   essential: "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]",
-  rising: "bg-emerald-500/20 text-emerald-300",
-  classic: "bg-amber-500/20 text-amber-300",
+  rising: "bg-emerald-900/30 text-emerald-500",
+  classic: "bg-amber-900/30 text-amber-500",
 };
 
 function CuratedCard({
