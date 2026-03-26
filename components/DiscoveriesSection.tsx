@@ -5,58 +5,49 @@ import Link from "next/link";
 import { Font } from "@/lib/types";
 import { DISCOVERIES, Discovery } from "@/lib/discoveries";
 import { FontPreview } from "./FontPreview";
+import { SourcesMarquee } from "./SourcesMarquee";
 
 type DiscoveriesSectionProps = {
   fonts: Font[];
-  skipFirst?: number;
+  resolvedTheme?: string;
 };
 
 function DiscoveryCard({
   discovery,
   font,
-  index,
 }: {
   discovery: Discovery;
   font: Font;
-  index: number;
 }) {
-  const isLarge = index < 2;
-
   return (
-    <div className={`group border border-[var(--color-border)] rounded-2xl overflow-hidden
-      hover:border-[var(--color-text-muted)] transition-all ${isLarge ? "col-span-2" : ""}`}
-    >
-      {/* Font preview — hero area */}
+    <div className="group border border-[var(--color-border)] rounded-2xl overflow-hidden
+      hover:border-[var(--color-text-muted)] transition-all">
       <Link href={`/font/${font.id}`} className="block">
-        <div className={`px-10 flex items-center ${isLarge ? "min-h-[360px] py-16" : "min-h-[280px] py-12"}`}>
+        <div className="px-10 pt-14 pb-8 min-h-[280px] flex items-end">
           <FontPreview
             family={font.family}
             text={font.family}
             weight={font.variants.includes("700") ? 700 : 400}
             weights={[font.variants.includes("700") ? 700 : 400]}
-            className={`${isLarge ? "text-6xl lg:text-7xl" : "text-4xl lg:text-5xl"}`}
+            className="text-6xl lg:text-7xl"
           />
         </div>
       </Link>
 
-      {/* Info area */}
       <div className="px-10 pb-10 space-y-4 border-t border-[var(--color-border)]">
-        {/* Headline + foundry */}
         <div className="pt-8">
           <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-2">
             {discovery.foundry}
           </div>
-          <h3 className={`font-bold tracking-tight leading-tight ${isLarge ? "text-2xl" : "text-xl"}`}>
+          <h3 className="text-xl font-bold tracking-tight leading-tight">
             {discovery.headline}
           </h3>
         </div>
 
-        {/* Objective */}
         <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
           {discovery.objective}
         </p>
 
-        {/* Why special — detailed */}
         <div className="p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
           <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Why this font matters</div>
           <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
@@ -64,21 +55,17 @@ function DiscoveryCard({
           </p>
         </div>
 
-        {/* Context + metadata */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-1">Best for</div>
             <p className="text-xs text-[var(--color-text-muted)]">{discovery.context}</p>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="text-right text-[10px] text-[var(--color-text-muted)]">
-              <div>{font.variants.length} styles</div>
-              {font.variable && <div className="mt-0.5">Variable</div>}
-            </div>
+          <div className="text-right text-[10px] text-[var(--color-text-muted)] shrink-0">
+            <div>{font.variants.length} styles</div>
+            {font.variable && <div className="mt-0.5">Variable</div>}
           </div>
         </div>
 
-        {/* Actions */}
         <div className="flex gap-3 pt-2">
           <Link
             href={`/font/${font.id}`}
@@ -120,38 +107,44 @@ function DiscoveryCard({
   );
 }
 
-export function DiscoveriesSection({ fonts, skipFirst = 0 }: DiscoveriesSectionProps) {
+export function DiscoveriesSection({ fonts, resolvedTheme }: DiscoveriesSectionProps) {
   const discoveries = useMemo(() => {
-    return DISCOVERIES.slice(skipFirst).map((d) => ({
+    return DISCOVERIES.map((d) => ({
       discovery: d,
       font: fonts.find((f) => f.id === d.id),
     })).filter((d) => d.font) as { discovery: Discovery; font: Font }[];
-  }, [fonts, skipFirst]);
+  }, [fonts]);
 
   if (discoveries.length === 0) return null;
 
   return (
-    <section className="py-12">
-      <div className="text-center mb-12">
-        <div className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-text-muted)] mb-4">
-          Undiscovered
-        </div>
-        <h2 className="text-4xl lg:text-5xl font-bold tracking-tight">
-          Fonts worth knowing
-        </h2>
-        <p className="mt-4 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
-          High-quality typefaces that haven't reached the mainstream yet.
-          Each one selected for technical excellence, unique character, and untapped potential.
+    <section className="pt-20 lg:pt-28 pb-12">
+      {/* Logo + Title — one cohesive block */}
+      <div className="text-center mb-10">
+        <img
+          src={resolvedTheme === "light" ? "/logo-black.png" : "/foracle-logo.png"}
+          alt="Foracle"
+          className="h-12 md:h-16 lg:h-20 mx-auto mb-8"
+        />
+        <p className="text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
+          Fonts worth knowing — a curated collection of the best free fonts, powered by
+          the collaboration between human taste and AI. Each one selected for technical
+          excellence, community signals, and untapped potential. Updated continuously.
         </p>
       </div>
 
+      {/* Sources marquee */}
+      <div className="mb-16 -mx-6 lg:-mx-10">
+        <SourcesMarquee />
+      </div>
+
+      {/* All discoveries — same format, two columns */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {discoveries.map((d, i) => (
+        {discoveries.map((d) => (
           <DiscoveryCard
             key={d.discovery.id}
             discovery={d.discovery}
             font={d.font}
-            index={i}
           />
         ))}
       </div>
