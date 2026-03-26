@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontPreview } from "./FontPreview";
 import { AsciiArt } from "./AsciiArt";
 
@@ -551,9 +551,37 @@ function DashboardTemplate({ h, b }: { h: React.CSSProperties; b: React.CSSPrope
 
 export function PairPreview({ headingFamily, bodyFamily }: PairPreviewProps) {
   const [template, setTemplate] = useState<Template>("blog");
+  const [fontsReady, setFontsReady] = useState(false);
   const [settings, setSettings] = useState<TypeSettings>({
     headingSize: 48, bodySize: 18, letterSpacing: 0, lineHeight: 1.5,
   });
+
+  // Load fonts eagerly via <link> tags
+  useEffect(() => {
+    setFontsReady(false);
+    const families = [headingFamily, bodyFamily];
+    const promises: Promise<void>[] = [];
+
+    families.forEach((family) => {
+      const encoded = family.replace(/ /g, "+");
+      const linkId = `pair-font-${encoded}`;
+
+      if (!document.getElementById(linkId)) {
+        const link = document.createElement("link");
+        link.id = linkId;
+        link.rel = "stylesheet";
+        link.href = `https://fonts.googleapis.com/css2?family=${encoded}:wght@100;200;300;400;500;600;700;800;900&display=swap`;
+        document.head.appendChild(link);
+      }
+
+      promises.push(
+        document.fonts.load(`400 1em "${family}"`).then(() => {}),
+        document.fonts.load(`700 1em "${family}"`).then(() => {})
+      );
+    });
+
+    Promise.all(promises).then(() => setFontsReady(true)).catch(() => setFontsReady(true));
+  }, [headingFamily, bodyFamily]);
 
   const h: React.CSSProperties = {
     fontFamily: `"${headingFamily}", sans-serif`,
@@ -605,7 +633,7 @@ export function PairPreview({ headingFamily, bodyFamily }: PairPreviewProps) {
       </div>
 
       {/* Template preview */}
-      <div className="border border-[var(--color-border)] rounded-xl overflow-hidden">
+      <div className={`border border-[var(--color-border)] rounded-xl overflow-hidden transition-opacity duration-300 ${fontsReady ? "opacity-100" : "opacity-50"}`}>
         <div className="px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] flex items-center gap-2">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)]/30" />
@@ -621,9 +649,12 @@ export function PairPreview({ headingFamily, bodyFamily }: PairPreviewProps) {
         {template === "dashboard2" && <CrmTemplate h={h} b={b} />}
       </div>
 
-      {/* Font loaders */}
-      <FontPreview family={headingFamily} text="" weight={700} weights={[700]} className="hidden" />
-      <FontPreview family={bodyFamily} text="" weight={400} weights={[400]} className="hidden" />
+      {/* Font loading indicator */}
+      {!fontsReady && (
+        <div className="text-center py-4 text-xs text-[var(--color-text-muted)]">
+          Loading fonts...
+        </div>
+      )}
     </div>
   );
 }

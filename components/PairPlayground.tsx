@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Font } from "@/lib/types";
 import { getPairSuggestions, PairSuggestion } from "@/lib/pairing";
-import { Mood, MOODS, getMoodById } from "@/lib/moods";
 import { FontSelector } from "./FontSelector";
 import { PairPreview } from "./PairPreview";
 import { AiRationale } from "./AiRationale";
@@ -28,7 +27,6 @@ export function PairPlayground({
   const [rationale, setRationale] = useState<string | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [allRationales, setAllRationales] = useState<Record<string, string>>({});
-  const [mood, setMood] = useState<Mood | null>(null);
 
   const primary = heading;
 
@@ -38,18 +36,13 @@ export function PairPlayground({
       return;
     }
 
-    const moodConfig = mood ? getMoodById(mood) : undefined;
-    const moodFilter = moodConfig
-      ? { bodyCategories: moodConfig.bodyCategories, preferVariable: moodConfig.preferVariable, minWeights: moodConfig.minWeights }
-      : undefined;
-
-    const results = getPairSuggestions(primary, fonts, 6, moodFilter);
+    const results = getPairSuggestions(primary, fonts, 6);
     setSuggestions(results);
 
     if (!body && results.length > 0) {
       setBody(results[0].font);
     }
-  }, [primary, fonts, mood]);
+  }, [primary, fonts]);
 
   const fetchRationale = useCallback(async () => {
     if (!heading || !body || suggestions.length === 0) return;
@@ -116,31 +109,6 @@ export function PairPlayground({
 
   return (
     <div className="space-y-6">
-      {/* Mood selector */}
-      <div>
-        <div className="text-sm text-[var(--color-text-muted)] mb-3">Mood</div>
-        <div className="flex gap-2 flex-wrap">
-          {MOODS.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => setMood(mood === m.id ? null : m.id)}
-              className={`px-4 py-2 rounded-lg text-sm transition-all ${
-                mood === m.id
-                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] font-medium"
-                  : "border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)]"
-              }`}
-            >
-              {m.label}
-            </button>
-          ))}
-        </div>
-        {mood && (
-          <p className="mt-2 text-sm text-[var(--color-text-muted)] animate-in">
-            {getMoodById(mood).description}
-          </p>
-        )}
-      </div>
-
       {/* Font selectors */}
       <div className="flex items-end gap-4">
         <FontSelector
@@ -165,6 +133,55 @@ export function PairPlayground({
           onSelect={setBody}
         />
       </div>
+
+      {/* Download pair */}
+      {heading && body && (
+        <div className="flex items-center gap-3 p-5 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-medium">
+              {heading.family} × {body.family}
+            </div>
+            <div className="text-xs text-[var(--color-text-muted)] mt-0.5">
+              {heading.variants.length + body.variants.length} styles total
+              {(heading.variable || body.variable) && " · Variable"}
+            </div>
+          </div>
+          <a
+            href={`https://fonts.google.com/download?family=${encodeURIComponent(heading.family)}|${encodeURIComponent(body.family)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium
+              bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] transition-colors shrink-0"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Pair
+          </a>
+          <a
+            href={`https://fonts.google.com/specimen/${heading.family.replace(/ /g, "+")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm
+              border border-[var(--color-border)] text-[var(--color-text-secondary)]
+              hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors shrink-0"
+          >
+            {heading.family} ↗
+          </a>
+          <a
+            href={`https://fonts.google.com/specimen/${body.family.replace(/ /g, "+")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm
+              border border-[var(--color-border)] text-[var(--color-text-secondary)]
+              hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors shrink-0"
+          >
+            {body.family} ↗
+          </a>
+        </div>
+      )}
 
       {/* Preview */}
       {heading && body && (
