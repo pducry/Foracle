@@ -147,6 +147,13 @@ export function CuratedSection({ fonts }: CuratedSectionProps) {
 
   return (
     <section className="py-10">
+      {/* Section title */}
+      <div className="text-center mb-8">
+        <h2 className="text-sm text-[var(--color-text-secondary)]">
+          Editor's Picks — community-validated fonts by category
+        </h2>
+      </div>
+
       {/* Category filter */}
       <div className="flex gap-2 mb-8 justify-center">
         <button
