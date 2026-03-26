@@ -57,6 +57,35 @@ html {
   font-size: 18px;
 }
 
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 0;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #000000;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff transparent;
+}
+
+[data-theme="light"] * {
+  scrollbar-color: #000000 transparent;
+}
+
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }

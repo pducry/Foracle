@@ -148,10 +148,13 @@ export function CuratedSection({ fonts }: CuratedSectionProps) {
   return (
     <section className="py-10">
       {/* Section title */}
-      <div className="text-center mb-8">
-        <h2 className="text-sm text-[var(--color-text-secondary)]">
-          Editor's Picks — community-validated fonts by category
+      <div className="text-center mb-10">
+        <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
+          Editor's Picks
         </h2>
+        <p className="mt-3 text-sm text-[var(--color-text-muted)]">
+          Community-validated fonts by category
+        </p>
       </div>
 
       {/* Category filter */}
