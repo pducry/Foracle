@@ -49311,5 +49311,62 @@
     "lastModified": "2024-01-01",
     "popularity": 62,
     "source": "github"
+  },
+  {
+    "id": "nacelle",
+    "family": "Nacelle",
+    "category": "sans-serif",
+    "variants": [
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": false,
+    "axes": [],
+    "designers": "Dot Colon",
+    "license": "SIL Open Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 110,
+    "source": "github"
+  },
+  {
+    "id": "bespoke-serif",
+    "family": "Bespoke Serif",
+    "category": "serif",
+    "variants": [
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800"
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "variable": true,
+    "axes": [
+      {
+        "tag": "wght",
+        "start": 200,
+        "end": 800
+      }
+    ],
+    "designers": "James Edmondson, OH no Type Co.",
+    "license": "ITF Free Font License",
+    "lastModified": "2024-01-01",
+    "popularity": 105,
+    "source": "fontshare"
   }
 ]

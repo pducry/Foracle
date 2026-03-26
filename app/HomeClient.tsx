@@ -5,8 +5,9 @@ import { useTheme } from "next-themes";
 import { Header } from "@/components/Header";
 import { FontGrid } from "@/components/FontGrid";
 import { CuratedSection } from "@/components/CuratedSection";
+import { DiscoveriesSection } from "@/components/DiscoveriesSection";
 import { SourcesMarquee } from "@/components/SourcesMarquee";
-import { Font, Category, CATEGORY_LABELS } from "@/lib/types";
+import { Font } from "@/lib/types";
 
 type HomeClientProps = {
   fonts: Font[];
@@ -49,6 +50,14 @@ export function HomeClient({ fonts }: HomeClientProps) {
         <div className="-mt-10 lg:-mt-14">
           <SourcesMarquee />
         </div>
+
+        {/* Discoveries — hero section */}
+        <div className="px-6 lg:px-10">
+          <DiscoveriesSection fonts={fonts} />
+        </div>
+
+        {/* Divider */}
+        <div className="mx-6 lg:mx-10 border-t border-[var(--color-border)]" />
 
         {/* Editor's Picks */}
         <div className="px-6 lg:px-10">
