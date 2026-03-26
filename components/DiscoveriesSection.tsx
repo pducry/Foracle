@@ -8,6 +8,7 @@ import { FontPreview } from "./FontPreview";
 
 type DiscoveriesSectionProps = {
   fonts: Font[];
+  skipFirst?: number;
 };
 
 function DiscoveryCard({
@@ -119,13 +120,13 @@ function DiscoveryCard({
   );
 }
 
-export function DiscoveriesSection({ fonts }: DiscoveriesSectionProps) {
+export function DiscoveriesSection({ fonts, skipFirst = 0 }: DiscoveriesSectionProps) {
   const discoveries = useMemo(() => {
-    return DISCOVERIES.map((d) => ({
+    return DISCOVERIES.slice(skipFirst).map((d) => ({
       discovery: d,
       font: fonts.find((f) => f.id === d.id),
     })).filter((d) => d.font) as { discovery: Discovery; font: Font }[];
-  }, [fonts]);
+  }, [fonts, skipFirst]);
 
   if (discoveries.length === 0) return null;
 
