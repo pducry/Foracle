@@ -74,7 +74,7 @@ export function FontGrid({ fonts, query, categoryLabel, previewText }: FontGridP
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {fonts.slice(0, visible).map((font) => (
           <div key={font.id} data-font-id={font.id}>
             <FontCard font={font} previewText={previewText} draggingFont={draggingFont} />

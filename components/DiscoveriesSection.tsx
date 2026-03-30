@@ -23,39 +23,40 @@ function DiscoveryCard({
     <div className="group border border-[var(--color-border)] rounded-2xl overflow-hidden
       hover:border-[var(--color-text-muted)] transition-all">
       <Link href={`/font/${font.id}`} className="block">
-        <div className="px-10 pt-14 pb-8 min-h-[280px] flex items-end">
+        <div className="px-6 pt-8 pb-6 sm:px-10 sm:pt-14 sm:pb-8 min-h-[140px] sm:min-h-[280px] flex items-end">
           <FontPreview
             family={font.family}
             text={font.family}
             weight={font.variants.includes("700") ? 700 : 400}
             weights={[font.variants.includes("700") ? 700 : 400]}
-            className="text-6xl lg:text-7xl"
+            className="text-4xl sm:text-6xl lg:text-7xl"
           />
         </div>
       </Link>
 
-      <div className="px-10 pb-10 space-y-4 border-t border-[var(--color-border)]">
-        <div className="pt-8">
+      <div className="px-6 pb-6 sm:px-10 sm:pb-10 space-y-3 sm:space-y-4 border-t border-[var(--color-border)]">
+        <div className="pt-4 sm:pt-8">
           <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-2">
             {discovery.foundry}
           </div>
-          <h3 className="text-xl font-bold tracking-tight leading-tight">
+          <h3 className="text-lg sm:text-xl font-bold tracking-tight leading-tight">
             {discovery.headline}
           </h3>
         </div>
 
-        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        {/* Hidden on mobile, visible from sm up */}
+        <p className="hidden sm:block text-sm text-[var(--color-text-secondary)] leading-relaxed">
           {discovery.objective}
         </p>
 
-        <div className="p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+        <div className="hidden sm:block p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
           <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Why this font matters</div>
           <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
             {discovery.whySpecial}
           </p>
         </div>
 
-        <div className="flex items-start justify-between gap-4">
+        <div className="hidden sm:flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-1">Best for</div>
             <p className="text-xs text-[var(--color-text-muted)]">{discovery.context}</p>
@@ -78,7 +79,7 @@ function DiscoveryCard({
             href={`https://fonts.google.com/specimen/${font.family.replace(/ /g, "+")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm
+            className="hidden sm:flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm
               border border-[var(--color-border)] text-[var(--color-text-secondary)]
               hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors"
           >
@@ -91,7 +92,7 @@ function DiscoveryCard({
           </a>
           <Link
             href={`/pair?heading=${font.id}`}
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm
+            className="hidden sm:flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm
               border border-[var(--color-border)] text-[var(--color-text-secondary)]
               hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors"
           >
@@ -118,28 +119,27 @@ export function DiscoveriesSection({ fonts, resolvedTheme }: DiscoveriesSectionP
   if (discoveries.length === 0) return null;
 
   return (
-    <section className="pt-20 lg:pt-28 pb-12">
+    <section className="pt-12 sm:pt-20 lg:pt-28 pb-12">
       {/* Logo + Title — one cohesive block */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-8 sm:mb-10">
         <img
           src={resolvedTheme === "light" ? "/logo-black.png" : "/foracle-logo.png"}
           alt="Foracle"
-          className="h-12 md:h-16 lg:h-20 mx-auto mb-8"
+          className="h-8 sm:h-12 md:h-16 lg:h-20 mx-auto mb-4 sm:mb-8"
         />
-        <p className="text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
           Fonts worth knowing — a curated collection of the best free fonts, powered by
-          the collaboration between human taste and AI. Each one selected for technical
-          excellence, community signals, and untapped potential. Updated continuously.
+          the collaboration between human taste and AI.
         </p>
       </div>
 
       {/* Sources marquee */}
-      <div className="mb-16 -mx-6 lg:-mx-10">
+      <div className="mb-8 sm:mb-16 -mx-4 sm:-mx-6 lg:-mx-10">
         <SourcesMarquee />
       </div>
 
-      {/* All discoveries — same format, two columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      {/* All discoveries — single column mobile, two columns desktop */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
         {discoveries.map((d) => (
           <DiscoveryCard
             key={d.discovery.id}

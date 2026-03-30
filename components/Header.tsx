@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { SearchBar } from "./SearchBar";
+import { MobileMenu } from "./MobileMenu";
 
 type HeaderProps = {
   onSearch?: (query: string) => void;
@@ -19,7 +20,7 @@ export function Header({
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg-primary)]">
-      <div className="px-6 lg:px-10 h-14 flex items-center gap-4">
+      <div className="px-4 sm:px-6 lg:px-10 h-14 flex items-center gap-4">
         <Link href="/" className="shrink-0">
           <img
             src="/minilogo.png"
@@ -30,17 +31,18 @@ export function Header({
 
         <div className="flex-1" />
 
+        {/* Desktop: search + nav + theme */}
         {showSearch && onSearch && (
-          <div className="w-56 shrink-0">
+          <div className="hidden sm:block w-56 shrink-0">
             <SearchBar onSearch={onSearch} />
           </div>
         )}
 
-        <div className="w-px h-5 bg-[var(--color-border)]" />
+        <div className="hidden sm:block w-px h-5 bg-[var(--color-border)]" />
 
         <Link
           href="/pair"
-          className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+          className={`hidden sm:flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
             pathname === "/pair"
               ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]"
               : "border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)]"
@@ -55,7 +57,7 @@ export function Header({
 
         <button
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-          className="shrink-0 p-2 rounded-lg text-[var(--color-text-muted)]
+          className="hidden sm:block shrink-0 p-2 rounded-lg text-[var(--color-text-muted)]
             hover:text-[var(--color-text-primary)] transition-colors"
           aria-label="Toggle theme"
         >
@@ -77,6 +79,9 @@ export function Header({
             </svg>
           )}
         </button>
+
+        {/* Mobile: hamburger menu */}
+        <MobileMenu onSearch={showSearch ? onSearch : undefined} />
       </div>
     </header>
   );

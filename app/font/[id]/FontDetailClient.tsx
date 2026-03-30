@@ -41,16 +41,16 @@ export function FontDetailClient({ font, allFonts }: Props) {
 
       <Header showSearch={false} />
 
-      <main id="main-content" className="px-6 lg:px-10">
+      <main id="main-content" className="px-4 sm:px-6 lg:px-10">
         <div className="py-4">
           <Link href="/" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
             ← Back to catalog
           </Link>
         </div>
 
-        <section className="text-center py-12 border-b border-[var(--color-border)]">
+        <section className="text-center py-8 sm:py-12 border-b border-[var(--color-border)]">
           <FontPreview family={font.family} text={font.family} weight={400}
-            className="text-6xl md:text-8xl text-[var(--color-text-primary)]" />
+            className="text-4xl sm:text-6xl md:text-8xl text-[var(--color-text-primary)]" />
           <div className="mt-6 flex items-center justify-center gap-2 text-sm text-[var(--color-text-secondary)]">
             <span>{CATEGORY_LABELS[font.category]}</span>
             <span className="text-[var(--color-text-muted)]">·</span>

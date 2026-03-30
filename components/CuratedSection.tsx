@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Font, CATEGORY_LABELS } from "@/lib/types";
 import { CURATED, CuratedCategory, CuratedFont } from "@/lib/curated";
@@ -107,6 +107,8 @@ function CuratedCard({
   );
 }
 
+const MOBILE_VISIBLE = 2;
+
 function CategoryRow({
   category,
   fonts,
@@ -114,6 +116,28 @@ function CategoryRow({
   category: CuratedCategory;
   fonts: Font[];
 }) {
+  const [expanded, setExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const resolvedFonts = category.fonts
+    .map((curated) => {
+      const font = fonts.find((f) => f.id === curated.id);
+      return font ? { font, curated } : null;
+    })
+    .filter(Boolean) as { font: Font; curated: CuratedFont }[];
+
+  const visibleFonts = isMobile && !expanded
+    ? resolvedFonts.slice(0, MOBILE_VISIBLE)
+    : resolvedFonts;
+  const hasMore = isMobile && !expanded && resolvedFonts.length > MOBILE_VISIBLE;
+
   return (
     <div>
       <div className="flex items-end justify-between mb-4">
@@ -123,16 +147,31 @@ function CategoryRow({
         </div>
         <span className="text-xs text-[var(--color-text-muted)]">{category.fonts.length} picks</span>
       </div>
-      <div className="flex gap-4 overflow-x-auto pb-3">
-        {category.fonts.map((curated) => {
-          const font = fonts.find((f) => f.id === curated.id);
-          if (!font) return null;
-          return (
-            <div key={curated.id} className="min-w-[400px] max-w-[480px] shrink-0">
-              <CuratedCard font={font} curated={curated} />
-            </div>
-          );
-        })}
+
+      {/* Mobile: stacked vertically */}
+      <div className="flex flex-col gap-3 sm:hidden">
+        {visibleFonts.map(({ font, curated }) => (
+          <CuratedCard key={curated.id} font={font} curated={curated} />
+        ))}
+        {hasMore && (
+          <button
+            onClick={() => setExpanded(true)}
+            className="mx-auto px-5 py-2 rounded-lg text-xs font-medium
+              border border-[var(--color-border)] text-[var(--color-text-muted)]
+              hover:text-[var(--color-text-primary)] transition-colors"
+          >
+            Ver mais ({resolvedFonts.length - MOBILE_VISIBLE} restantes)
+          </button>
+        )}
+      </div>
+
+      {/* Desktop: horizontal scroll */}
+      <div className="hidden sm:flex gap-4 overflow-x-auto pb-3">
+        {resolvedFonts.map(({ font, curated }) => (
+          <div key={curated.id} className="min-w-[400px] max-w-[480px] shrink-0">
+            <CuratedCard font={font} curated={curated} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -146,19 +185,19 @@ export function CuratedSection({ fonts }: CuratedSectionProps) {
     : CURATED;
 
   return (
-    <section className="py-10">
+    <section className="py-8 sm:py-10">
       {/* Section title */}
-      <div className="text-center mb-10">
-        <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
-          Editor's Picks
+      <div className="text-center mb-6 sm:mb-10">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+          Editor&apos;s Picks
         </h2>
-        <p className="mt-3 text-sm text-[var(--color-text-muted)]">
+        <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-[var(--color-text-muted)]">
           Community-validated fonts by category
         </p>
       </div>
 
-      {/* Category filter */}
-      <div className="flex gap-2 mb-8 justify-center">
+      {/* Category filter — wraps on mobile */}
+      <div className="flex gap-2 mb-6 sm:mb-8 justify-center flex-wrap px-2 sm:px-0">
         <button
           onClick={() => setActiveCategory(null)}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
@@ -185,7 +224,7 @@ export function CuratedSection({ fonts }: CuratedSectionProps) {
       </div>
 
       {/* Categories */}
-      <div className="space-y-10">
+      <div className="space-y-8 sm:space-y-10">
         {visibleCategories.map((category) => (
           <CategoryRow key={category.id} category={category} fonts={fonts} />
         ))}

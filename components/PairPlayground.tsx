@@ -109,8 +109,8 @@ export function PairPlayground({
 
   return (
     <div className="space-y-6">
-      {/* Font selectors */}
-      <div className="flex items-end gap-4">
+      {/* Font selectors — stacked on mobile, side by side on sm+ */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 sm:gap-4">
         <FontSelector
           label="Heading Font"
           fonts={fonts}
@@ -119,12 +119,13 @@ export function PairPlayground({
         />
         <button
           onClick={handleSwap}
-          className="shrink-0 mb-1 p-2 rounded-lg border border-[var(--color-border)]
+          className="shrink-0 self-center p-2 rounded-lg border border-[var(--color-border)]
             text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]
-            hover:border-[var(--color-text-muted)] transition-colors"
+            hover:border-[var(--color-text-muted)] transition-colors sm:mb-1"
           aria-label="Swap fonts"
         >
-          ⇄
+          <span className="sm:hidden">⇅</span>
+          <span className="hidden sm:inline">⇄</span>
         </button>
         <FontSelector
           label="Body Font"
@@ -136,7 +137,7 @@ export function PairPlayground({
 
       {/* Download pair */}
       {heading && body && (
-        <div className="flex items-center gap-3 p-5 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 sm:p-5 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
           <div className="flex-1 min-w-0">
             <div className="text-sm font-medium">
               {heading.family} × {body.family}
@@ -146,40 +147,42 @@ export function PairPlayground({
               {(heading.variable || body.variable) && " · Variable"}
             </div>
           </div>
-          <a
-            href={`https://fonts.google.com/download?family=${encodeURIComponent(heading.family)}|${encodeURIComponent(body.family)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium
-              bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] transition-colors shrink-0"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            Download Pair
-          </a>
-          <a
-            href={`https://fonts.google.com/specimen/${heading.family.replace(/ /g, "+")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm
-              border border-[var(--color-border)] text-[var(--color-text-secondary)]
-              hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors shrink-0"
-          >
-            {heading.family} ↗
-          </a>
-          <a
-            href={`https://fonts.google.com/specimen/${body.family.replace(/ /g, "+")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm
-              border border-[var(--color-border)] text-[var(--color-text-secondary)]
-              hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors shrink-0"
-          >
-            {body.family} ↗
-          </a>
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+            <a
+              href={`https://fonts.google.com/download?family=${encodeURIComponent(heading.family)}|${encodeURIComponent(body.family)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-medium
+                bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] transition-colors shrink-0"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Pair
+            </a>
+            <a
+              href={`https://fonts.google.com/specimen/${heading.family.replace(/ /g, "+")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm
+                border border-[var(--color-border)] text-[var(--color-text-secondary)]
+                hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors shrink-0"
+            >
+              {heading.family} ↗
+            </a>
+            <a
+              href={`https://fonts.google.com/specimen/${body.family.replace(/ /g, "+")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm
+                border border-[var(--color-border)] text-[var(--color-text-secondary)]
+                hover:text-[var(--color-text-primary)] hover:border-[var(--color-text-muted)] transition-colors shrink-0"
+            >
+              {body.family} ↗
+            </a>
+          </div>
         </div>
       )}
 
