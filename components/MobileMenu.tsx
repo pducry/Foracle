@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -12,8 +12,13 @@ type MobileMenuProps = {
 
 export function MobileMenu({ onSearch }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <>
@@ -36,7 +41,7 @@ export function MobileMenu({ onSearch }: MobileMenuProps) {
         )}
       </button>
 
-      {open && (
+      {open && mounted && (
         <div className="sm:hidden fixed inset-x-0 top-14 bottom-0 z-40 bg-[var(--color-bg-primary)] border-t border-[var(--color-border)]">
           <div className="p-4 space-y-4">
             {onSearch && (

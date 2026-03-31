@@ -109,6 +109,9 @@ function DiscoveryCard({
 }
 
 export function DiscoveriesSection({ fonts, resolvedTheme }: DiscoveriesSectionProps) {
+  // Default to dark theme logo during SSR to avoid hydration mismatch
+  const logoSrc = resolvedTheme === "light" ? "/logo-black.png" : "/foracle-logo.png";
+
   const discoveries = useMemo(() => {
     return DISCOVERIES.map((d) => ({
       discovery: d,
