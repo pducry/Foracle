@@ -45,7 +45,7 @@ export function MobileMenu({ onSearch }: MobileMenuProps) {
         <div className="sm:hidden fixed inset-x-0 top-14 bottom-0 z-40 bg-[var(--color-bg-primary)] border-t border-[var(--color-border)]">
           <div className="p-4 space-y-4">
             {onSearch && (
-              <SearchBar onSearch={(q) => { onSearch(q); setOpen(false); }} />
+              <SearchBar onSearch={(q) => { onSearch(q); }} onNavigate={() => setOpen(false)} />
             )}
 
             <Link
