@@ -599,11 +599,13 @@ export function PairPreview({ headingFamily, bodyFamily }: PairPreviewProps) {
     lineHeight: settings.lineHeight,
   };
 
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+
   return (
-    <div className="space-y-6">
-      {/* Controls */}
-      <div className="bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl p-5">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="space-y-4 sm:space-y-6">
+      {/* Controls — simplified on mobile */}
+      <div className="bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-xl p-4 sm:p-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <Slider label="Heading" value={settings.headingSize} min={24} max={120} step={1} unit="px"
             onChange={(v) => setSettings((s) => ({ ...s, headingSize: v }))} />
           <Slider label="Body" value={settings.bodySize} min={12} max={48} step={1} unit="px"
@@ -615,38 +617,73 @@ export function PairPreview({ headingFamily, bodyFamily }: PairPreviewProps) {
         </div>
       </div>
 
-      {/* Template tabs */}
-      <div className="flex gap-1 p-1 bg-[var(--color-bg-secondary)] rounded-lg border border-[var(--color-border)] w-fit">
-        {TEMPLATES.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setTemplate(t.id)}
-            className={`px-4 py-2 rounded-md text-sm transition-colors ${
-              template === t.id
-                ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] font-medium"
-                : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]"
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
+      {/* Mobile: simplified preview */}
+      <div className="sm:hidden">
+        <div className={`border border-[var(--color-border)] rounded-xl overflow-hidden p-6 space-y-5 transition-opacity duration-300 ${fontsReady ? "opacity-100" : "opacity-50"}`}>
+          <div>
+            <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Heading</div>
+            <div contentEditable suppressContentEditableWarning className="outline-none leading-tight" style={h}>
+              The invisible art of pairing typefaces
+            </div>
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Body</div>
+            <div contentEditable suppressContentEditableWarning className="outline-none text-[var(--color-text-secondary)]" style={b}>
+              Good typography is invisible. When two typefaces work in harmony, readers don&apos;t notice the fonts — they simply absorb the message. The contrast between a bold display face and a quiet text face creates visual hierarchy without effort.
+            </div>
+          </div>
+          <div className="border-l-2 border-[var(--color-text-muted)] pl-4 py-1">
+            <div className="italic text-[var(--color-text-primary)]"
+              style={{ fontFamily: h.fontFamily, fontSize: `${Math.min(settings.bodySize * 1.2, 24)}px`, lineHeight: 1.5 }}>
+              &ldquo;Type is a beautiful group of letters, not a group of beautiful letters.&rdquo;
+            </div>
+            <div className="mt-2 text-xs text-[var(--color-text-muted)]" style={{ fontFamily: b.fontFamily }}>
+              — Matthew Carter
+            </div>
+          </div>
+          <div className="flex items-center gap-2 pt-2 border-t border-[var(--color-border)]">
+            <div className="text-[10px] font-mono text-[var(--color-text-muted)]">
+              {headingFamily} × {bodyFamily}
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Template preview */}
-      <div className={`border border-[var(--color-border)] rounded-xl overflow-hidden transition-opacity duration-300 ${fontsReady ? "opacity-100" : "opacity-50"}`}>
-        <div className="px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] flex items-center gap-2">
-          <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)]/30" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)]/30" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)]/30" />
-          </div>
-          <span className="text-xs text-[var(--color-text-muted)] ml-2">
-            {TEMPLATES.find((t) => t.id === template)?.label}
-          </span>
+      {/* Desktop: full template preview */}
+      <div className="hidden sm:block">
+        {/* Template tabs */}
+        <div className="flex gap-1 p-1 mb-6 bg-[var(--color-bg-secondary)] rounded-lg border border-[var(--color-border)] w-fit">
+          {TEMPLATES.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTemplate(t.id)}
+              className={`px-4 py-2 rounded-md text-sm transition-colors ${
+                template === t.id
+                  ? "bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] font-medium"
+                  : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
-        {template === "blog" && <BlogTemplate h={h} b={b} />}
-        {template === "dashboard" && <DashboardTemplate h={h} b={b} />}
-        {template === "dashboard2" && <CrmTemplate h={h} b={b} />}
+
+        {/* Template preview */}
+        <div className={`border border-[var(--color-border)] rounded-xl overflow-hidden transition-opacity duration-300 ${fontsReady ? "opacity-100" : "opacity-50"}`}>
+          <div className="px-4 py-2 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] flex items-center gap-2">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)]/30" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)]/30" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-text-muted)]/30" />
+            </div>
+            <span className="text-xs text-[var(--color-text-muted)] ml-2">
+              {TEMPLATES.find((t) => t.id === template)?.label}
+            </span>
+          </div>
+          {template === "blog" && <BlogTemplate h={h} b={b} />}
+          {template === "dashboard" && <DashboardTemplate h={h} b={b} />}
+          {template === "dashboard2" && <CrmTemplate h={h} b={b} />}
+        </div>
       </div>
 
       {/* Font loading indicator */}

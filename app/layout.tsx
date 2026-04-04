@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className="min-h-screen flex flex-col">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2
@@ -34,7 +35,10 @@ export default function RootLayout({
           defaultTheme="dark"
           themes={["dark", "light"]}
         >
-          {children}
+          <div className="flex-1">
+            {children}
+          </div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
